@@ -11,6 +11,9 @@ importers:
       '@vanilla-extract/css':
         specifier: ^1.17.1
         version: 1.17.1
+      '@vanilla-extract/recipes':
+        specifier: ^0.5.5
+        version: 0.5.5(@vanilla-extract/css@1.17.1)
       '@vanilla-extract/vite-plugin':
         specifier: ^5.0.1
         version: 5.0.1(@types/node@22.15.3)(vite@6.3.4(@types/node@22.15.3))
@@ -23,6 +26,9 @@ importers:
       eslint-plugin-prettier:
         specifier: ^5.3.1
         version: 5.3.1(eslint-config-prettier@10.1.2(eslint@9.26.0))(eslint@9.26.0)(prettier@3.5.3)
+      jotai:
+        specifier: ^2.12.4
+        version: 2.12.4(@types/react@19.1.2)(react@19.1.0)
       react:
         specifier: ^19.0.0
         version: 19.1.0
@@ -685,6 +691,11 @@ packages:
   '@vanilla-extract/private@1.0.6':
     resolution: {integrity: sha512-ytsG/JLweEjw7DBuZ/0JCN4WAQgM9erfSTdS1NQY778hFQSZ6cfCDEZZ0sgVm4k54uNz6ImKB33AYvSR//fjxw==}
 
+  '@vanilla-extract/recipes@0.5.5':
+    resolution: {integrity: sha512-VadU7+IFUwLNLMgks29AHav/K5h7DOEfTU91RItn5vwdPfzduodNg317YbgWCcpm7FSXkuR3B3X8ZOi95UOozA==}
+    peerDependencies:
+      '@vanilla-extract/css': ^1.0.0
+
   '@vanilla-extract/vite-plugin@5.0.1':
     resolution: {integrity: sha512-65IhqaNEAv/KjO1jJ52hSXiKUJqeFPlyY/hpRT71Y6bFoasHhzOcZKIQ/ze4fQovjjDL4US565rEiIn1I2qhFA==}
     peerDependencies:
@@ -1193,6 +1204,18 @@ packages:
 
   javascript-stringify@2.1.0:
     resolution: {integrity: sha512-JVAfqNPTvNq3sB/VHQJAFxN/sPgKnsKrCwyRt15zwNCdrMMJDdcEOdubuy+DuJYYdm0ox1J4uzEuYKkN+9yhVg==}
+
+  jotai@2.12.4:
+    resolution: {integrity: sha512-eFXLJol4oOLM8BS1+QV+XwaYQITG8n1tatBCFl4F5HE3zR5j2WIK8QpMt7VJIYmlogNUZfvB7wjwLoVk+umB9Q==}
+    engines: {node: '>=12.20.0'}
+    peerDependencies:
+      '@types/react': '>=17.0.0'
+      react: '>=17.0.0'
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+      react:
+        optional: true
 
   js-tokens@4.0.0:
     resolution: {integrity: sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ==}
@@ -2327,6 +2350,10 @@ snapshots:
 
   '@vanilla-extract/private@1.0.6': {}
 
+  '@vanilla-extract/recipes@0.5.5(@vanilla-extract/css@1.17.1)':
+    dependencies:
+      '@vanilla-extract/css': 1.17.1
+
   '@vanilla-extract/vite-plugin@5.0.1(@types/node@22.15.3)(vite@6.3.4(@types/node@22.15.3))':
     dependencies:
       '@vanilla-extract/compiler': 0.1.2(@types/node@22.15.3)
@@ -2865,6 +2892,11 @@ snapshots:
   isexe@2.0.0: {}
 
   javascript-stringify@2.1.0: {}
+
+  jotai@2.12.4(@types/react@19.1.2)(react@19.1.0):
+    optionalDependencies:
+      '@types/react': 19.1.2
+      react: 19.1.0
 
   js-tokens@4.0.0: {}
 
