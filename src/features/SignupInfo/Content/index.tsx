@@ -1,5 +1,5 @@
 import * as S from './style.css';
-import Arrow from '@/assets/arrow.svg?react';
+import { ArrowIcon } from '@/assets';
 import Button from '@/components/Button';
 import { useEffect, useState } from 'react';
 import { useAtom } from 'jotai';
@@ -29,7 +29,7 @@ export default function Content() {
 
   return (
     <div className={S.layout}>
-      <Arrow width="24px" height="24px" />
+      <ArrowIcon width="24px" height="24px" />
       <div className={S.contentWrapper}>
         <div>
           {currentUserType === 'user' ? (
