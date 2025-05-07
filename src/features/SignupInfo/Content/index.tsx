@@ -6,12 +6,12 @@ import { useAtom } from 'jotai';
 import { userType } from '@/shared/store/atom';
 
 export default function Content() {
-  const [currentUserType] = useAtom(userType);
   const [name, setName] = useState('');
   const [buttonState, setButtonState] = useState<'primary' | 'disabled'>(
     'primary'
   );
   const [warningText, setWarningText] = useState('');
+  const [currentUserType] = useAtom(userType);
 
   useEffect(() => {
     if (name.length > 12) {
