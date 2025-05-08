@@ -9,3 +9,4 @@ export { default as PlaceIcon } from './icons/place.svg?react';
 export { default as TextLogoIcon } from './icons/textLogo.svg?react';
 export { default as LogoIcon } from './icons/logo.svg?react';
 export { default as BusanRockFestaImg } from './imgs/busanRockFesta.jpg';
+export { default as PerformanceImg } from './imgs/performanceImg.jpg';
