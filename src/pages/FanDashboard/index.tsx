@@ -2,7 +2,8 @@ import * as S from './style.css';
 import Header from '@/components/Header';
 import NavigationBar from '@/components/NavigationBar';
 import Notification from '@/features/FanDashboard/Notification';
-import LivePerformance from '@/features/FanDashboard/LivePerformance';
+import LivePerformances from '@/features/FanDashboard/LivePerformances';
+import UpcomingPerformances from '@/features/FanDashboard/UpcomingPerformances';
 
 export default function FanDashboard() {
   return (
@@ -10,7 +11,8 @@ export default function FanDashboard() {
       <Header />
       <div className={S.contentLayout}>
         <Notification />
-        <LivePerformance />
+        <LivePerformances />
+        <UpcomingPerformances />
       </div>
       <NavigationBar />
     </div>

@@ -8,7 +8,7 @@ export const layout = style({
   backgroundColor: theme.gray['900'],
   ...flex.COLUMN_FLEX,
   gap: '20px',
-  padding: '0px 24px 108px 24px',
+  padding: '0px 24px 132px 24px',
 });
 
 export const contentLayout = style({

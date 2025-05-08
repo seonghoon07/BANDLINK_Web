@@ -26,7 +26,7 @@ export const artistName = style({
   color: theme.white,
 });
 
-export const reservingAmount = style({
+export const stateText = style({
   ...font.caption,
   color: theme.gray['200'],
 });
