@@ -19,4 +19,9 @@ export const upcomingPerformanceCardWrapper = style({
   ...flex.FLEX,
   gap: '8px',
   overflowX: 'auto',
+  selectors: {
+    '&::-webkit-scrollbar': {
+      display: 'none',
+    },
+  },
 });

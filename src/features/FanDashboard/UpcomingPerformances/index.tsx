@@ -10,7 +10,7 @@ export default function UpcomingPerformances() {
           type="upcoming"
           image="https://picsum.photos/200"
           artist="한로로"
-          reserving={1}
+          stateText="1"
         />
       </div>
     </div>

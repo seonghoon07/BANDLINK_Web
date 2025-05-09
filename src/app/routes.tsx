@@ -3,6 +3,7 @@ import StartPage from '@/pages/StartPage';
 import ChooseRole from '@/pages/ChooseRole';
 import SignupInfo from '@/pages/SignupInfo';
 import FanDashboard from '@/pages/FanDashboard';
+import SearchPerformance from '@/pages/SearchPerformance';
 
 export default function Router() {
   return (
@@ -12,6 +13,7 @@ export default function Router() {
       <Route path="/nickname" element={<SignupInfo />} />
       <Route path="/bandname" element={<SignupInfo />} />
       <Route path="/fan/dashboard" element={<FanDashboard />} />
+      <Route path="/fan/search" element={<SearchPerformance />} />
     </Routes>
   );
 }
