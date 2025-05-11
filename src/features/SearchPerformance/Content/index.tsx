@@ -2,8 +2,10 @@ import * as S from './style.css';
 import { SearchIcon } from '@/assets';
 import theme from '@/shared/styles/theme.css';
 import PerformanceItem from '@/components/PerformanceItem';
+import { useNavigate } from 'react-router-dom';
 
 export default function Content() {
+  const navigate = useNavigate();
   return (
     <div className={S.contentContainer}>
       <div className={S.headerContainer}>
@@ -22,6 +24,7 @@ export default function Content() {
       </div>
       <div className={S.performanceWrapper}>
         <PerformanceItem
+          onClick={() => navigate('/fan/performances/1')}
           image={'https://picsum.photos/300'}
           title={'집'}
           artist={'한로로'}

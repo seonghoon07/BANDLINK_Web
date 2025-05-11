@@ -5,6 +5,7 @@ interface PerformanceItemProps {
   title: string;
   artist: string;
   price: number;
+  onClick?: () => void;
 }
 
 export default function PerformanceItem({
@@ -12,9 +13,10 @@ export default function PerformanceItem({
   title,
   artist,
   price,
+  onClick,
 }: PerformanceItemProps) {
   return (
-    <div className={S.performanceItemContainer}>
+    <div className={S.performanceItemContainer} onClick={onClick}>
       <img className={S.performanceImg} src={image} />
       <div className={S.textWrapper}>
         <p className={S.title}>{title}</p>

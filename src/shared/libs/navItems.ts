@@ -9,7 +9,7 @@ export const navItems = [
   {
     label: '탐색',
     icon: SearchIcon,
-    href: '/fan/search',
+    href: '/fan/performances',
   },
   {
     label: '예매 내역',
