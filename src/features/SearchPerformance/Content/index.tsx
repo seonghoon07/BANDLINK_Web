@@ -1,7 +1,7 @@
 import * as S from './style.css';
 import { SearchIcon } from '@/assets';
 import theme from '@/shared/styles/theme.css';
-import PerformanceItem from '@/components/PerformanceItem';
+import PerformanceItem from '@/components/performance/PerformanceItem';
 import { useNavigate } from 'react-router-dom';
 
 export default function Content() {

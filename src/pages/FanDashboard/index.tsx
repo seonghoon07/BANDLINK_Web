@@ -1,6 +1,6 @@
 import * as S from './style.css';
-import Header from '@/components/Header';
-import NavigationBar from '@/components/NavigationBar';
+import Header from '@/components/layout/Header';
+import NavigationBar from '@/components/layout/NavigationBar';
 import Notification from '@/features/FanDashboard/Notification';
 import LivePerformances from '@/features/FanDashboard/LivePerformances';
 import UpcomingPerformances from '@/features/FanDashboard/UpcomingPerformances';

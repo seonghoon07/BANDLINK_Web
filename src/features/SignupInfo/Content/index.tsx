@@ -1,6 +1,6 @@
 import * as S from './style.css';
 import { ArrowIcon } from '@/assets';
-import Button from '@/components/Button';
+import Button from '@/components/common/Button';
 import { useEffect, useState } from 'react';
 import { useAtom } from 'jotai';
 import { userType } from '@/shared/store/atom';

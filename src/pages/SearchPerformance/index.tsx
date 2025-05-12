@@ -1,5 +1,5 @@
 import * as S from './style.css';
-import NavigationBar from '@/components/NavigationBar';
+import NavigationBar from '@/components/layout/NavigationBar';
 import Content from '@/features/SearchPerformance/Content';
 
 export default function SearchPerformance() {

@@ -1,7 +1,7 @@
 import * as S from './style.css';
 import { ArrowIcon } from '@/assets';
 import { useNavigate } from 'react-router-dom';
-import Button from '@/components/Button';
+import Button from '@/components/common/Button';
 
 export default function Content() {
   const navigate = useNavigate();
