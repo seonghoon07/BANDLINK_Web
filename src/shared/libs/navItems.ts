@@ -19,6 +19,6 @@ export const navItems = [
   {
     label: '마이페이지',
     icon: PersonIcon,
-    href: '/fan/profile',
+    href: '/profile',
   },
 ];

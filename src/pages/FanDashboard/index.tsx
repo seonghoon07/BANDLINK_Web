@@ -1,9 +1,9 @@
 import * as S from './style.css';
 import Header from '@/components/layout/Header';
 import NavigationBar from '@/components/layout/NavigationBar';
-import Notification from '@/features/FanDashboard/Notification';
-import LivePerformances from '@/features/FanDashboard/LivePerformances';
-import UpcomingPerformances from '@/features/FanDashboard/UpcomingPerformances';
+import Notification from '@/features/fan/FanDashboard/Notification';
+import LivePerformances from '@/features/fan/FanDashboard/LivePerformances';
+import UpcomingPerformances from '@/features/fan/FanDashboard/UpcomingPerformances';
 
 export default function FanDashboard() {
   return (
