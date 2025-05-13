@@ -14,6 +14,7 @@ export const performanceContentContainer = style({
   ...flex.COLUMN_FLEX,
   gap: '16px',
   overflowY: 'auto',
+  paddingBottom: '20px',
   '::-webkit-scrollbar': {
     display: 'none',
   },
