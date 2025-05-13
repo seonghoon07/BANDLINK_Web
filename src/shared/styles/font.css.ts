@@ -37,7 +37,7 @@ export const font = {
   },
   s1: {
     fontSize: '20px',
-    lineHeight: '120%',
+    lineHeight: '130%',
     fontWeight: 600,
   },
   s2: {

@@ -1,6 +1,6 @@
-import Person from '@/assets/person.svg?react';
-import Place from '@/assets/place.svg?react';
-import Note from '@/assets/note.svg?react';
+import Person from '@/assets/icons/person.svg?react';
+import Place from '@/assets/icons/place.svg?react';
+import Note from '@/assets/icons/note.svg?react';
 
 export const role = [
   {
