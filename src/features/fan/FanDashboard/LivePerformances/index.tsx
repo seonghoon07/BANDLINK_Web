@@ -1,5 +1,5 @@
 import * as S from './style.css';
-import LivePerformanceCard from '@/components/performance/PerformanceCard';
+import LivePerformanceCard from '@/components/DashboardCard';
 
 export default function LivePerformances() {
   return (

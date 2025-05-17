@@ -1,5 +1,5 @@
 import * as S from './style.css';
-import TicketItem from '@/components/ticket/TicketItem';
+import TicketItem from '@/components/TicketItem';
 import { ticketList } from '@/shared/libs/ticketItmes';
 
 export default function Content() {

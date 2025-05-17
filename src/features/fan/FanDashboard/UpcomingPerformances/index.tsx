@@ -1,5 +1,5 @@
 import * as S from './style.css';
-import PerformanceCard from '@/components/performance/PerformanceCard';
+import PerformanceCard from '@/components/DashboardCard';
 
 export default function UpcomingPerformances() {
   return (
