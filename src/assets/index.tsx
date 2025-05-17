@@ -8,6 +8,7 @@ export { default as NoteIcon } from './icons/note.svg?react';
 export { default as PlaceIcon } from './icons/place.svg?react';
 export { default as TextLogoIcon } from './icons/textLogo.svg?react';
 export { default as LogoIcon } from './icons/logo.svg?react';
+export { default as CalendarIcon } from './icons/calendar.svg?react';
 export { default as BusanRockFestaImg } from './imgs/busanRockFesta.jpg';
 export { default as PerformanceImg } from './imgs/performanceImg.jpg';
 export { default as PerformanceImg2 } from './imgs/performanceImg2.png';
