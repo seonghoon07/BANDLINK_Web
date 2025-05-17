@@ -16,6 +16,7 @@ export const performanceImg = style({
 });
 
 export const textWrapper = style({
+  width: '100px',
   ...flex.COLUMN_FLEX,
   gap: '4px',
 });
@@ -24,9 +25,15 @@ export const artistName = style({
   ...font.p3,
   fontWeight: '600',
   color: theme.white,
+  whiteSpace: 'nowrap',
+  overflow: 'hidden',
+  textOverflow: 'ellipsis',
 });
 
 export const stateText = style({
   ...font.caption,
   color: theme.gray['200'],
+  whiteSpace: 'nowrap',
+  overflow: 'hidden',
+  textOverflow: 'ellipsis',
 });
