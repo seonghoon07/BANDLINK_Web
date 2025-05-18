@@ -11,7 +11,7 @@ import {
   SearchPerformancePage,
   PerformanceDetailPage,
 } from '@/pages/fan';
-import { BandDashboardPage } from '@/pages/band';
+import { BandDashboardPage, SearchPlacePage } from '@/pages/band';
 
 export default function Router() {
   return (
@@ -26,6 +26,7 @@ export default function Router() {
       <Route path="/fan/tickets" element={<TicketHistoryPage />} />
       <Route path="/profile" element={<ProfilePage />} />
       <Route path="/band/dashboard" element={<BandDashboardPage />} />
+      <Route path="/band/place" element={<SearchPlacePage />} />
     </Routes>
   );
 }

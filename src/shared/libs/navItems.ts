@@ -17,7 +17,7 @@ export const navItems = {
   ],
   band: [
     { label: '홈', icon: HomeIcon, href: '/band/dashboard' },
-    { label: '공간', icon: PlaceIcon, href: '/band/place' },
+    { label: '장소', icon: PlaceIcon, href: '/band/place' },
     { label: '공연', icon: NoteIcon, href: '/band/performance' },
     { label: '마이페이지', icon: PersonIcon, href: '/profile' },
   ],
