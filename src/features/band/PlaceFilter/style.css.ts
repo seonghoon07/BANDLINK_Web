@@ -13,7 +13,7 @@ export const container = style({
 
 export const filterContainer = style({
   ...flex.COLUMN_FLEX,
-  gap: '20px',
+  gap: '28px',
 });
 
 export const filterHeader = style({
@@ -36,7 +36,7 @@ export const resetText = style({
 
 export const filterContentWrapper = style({
   ...flex.COLUMN_FLEX,
-  gap: '36px',
+  gap: '40px',
   width: '100%',
   padding: '0 24px',
 });
