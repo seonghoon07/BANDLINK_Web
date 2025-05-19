@@ -11,7 +11,11 @@ import {
   SearchPerformancePage,
   PerformanceDetailPage,
 } from '@/pages/fan';
-import { BandDashboardPage, SearchPlacePage } from '@/pages/band';
+import {
+  BandDashboardPage,
+  SearchPlacePage,
+  PlaceFilterPage,
+} from '@/pages/band';
 
 export default function Router() {
   return (
@@ -27,6 +31,7 @@ export default function Router() {
       <Route path="/profile" element={<ProfilePage />} />
       <Route path="/band/dashboard" element={<BandDashboardPage />} />
       <Route path="/band/place" element={<SearchPlacePage />} />
+      <Route path="/band/place/filter" element={<PlaceFilterPage />} />
     </Routes>
   );
 }

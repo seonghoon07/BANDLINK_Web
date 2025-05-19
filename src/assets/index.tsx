@@ -10,4 +10,6 @@ export { default as TextLogoIcon } from './icons/textLogo.svg?react';
 export { default as LogoIcon } from './icons/logo.svg?react';
 export { default as CalendarIcon } from './icons/calendar.svg?react';
 export { default as FilterIcon } from './icons/filter.svg?react';
+export { default as CloseIcon } from './icons/close.svg?react';
+export { default as CheckIcon } from './icons/check.svg?react';
 export { default as BusanRockFestaImg } from './imgs/busanRockFesta.jpg';
