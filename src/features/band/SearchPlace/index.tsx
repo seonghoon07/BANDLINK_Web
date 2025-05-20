@@ -3,8 +3,10 @@ import NavigationBar from '@/components/layout/NavigationBar';
 import theme from '@/shared/styles/theme.css';
 import { SearchIcon, FilterIcon } from '@/assets';
 import PlaceItem from '@/components/PlaceItem';
+import { useNavigate } from 'react-router-dom';
 
 export default function SearchPlace() {
+  const navigate = useNavigate();
   return (
     <div className={S.container}>
       <div className={S.headerContainer}>
@@ -22,7 +24,10 @@ export default function SearchPlace() {
         </div>
       </div>
       <div className={S.filterContainer}>
-        <div className={S.filterBtnContainer}>
+        <div
+          className={S.filterBtnContainer}
+          onClick={() => navigate('/band/place/filter')}
+        >
           <FilterIcon />
         </div>
       </div>
@@ -32,6 +37,7 @@ export default function SearchPlace() {
           placename={'디어뮤직 스튜디오 24시간 무인 음악연습실&합주실'}
           address={'부산 남구 문현동'}
           type={'합주실'}
+          onClick={() => navigate('/band/place/1')}
         />
         <PlaceItem
           imageUrl={'https://picsum.photos/200'}

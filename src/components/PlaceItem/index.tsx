@@ -5,6 +5,7 @@ interface PlaceItemProps {
   placename: string;
   address: string;
   type: string;
+  onClick?: () => void;
 }
 
 export default function PlaceItem({
@@ -12,9 +13,10 @@ export default function PlaceItem({
   placename,
   address,
   type,
+  onClick,
 }: PlaceItemProps) {
   return (
-    <div className={S.placeContainer}>
+    <div className={S.placeContainer} onClick={onClick}>
       <img className={S.placeImg} src={imageUrl} alt="장소 이미지" />
       <div className={S.textContainer}>
         <p className={S.placename}>{placename}</p>

@@ -14,7 +14,7 @@ import {
 import {
   BandDashboardPage,
   SearchPlacePage,
-  PlaceFilterPage,
+  PlaceFilterPage, PlaceDetailPage,
 } from '@/pages/band';
 
 export default function Router() {
@@ -32,6 +32,7 @@ export default function Router() {
       <Route path="/band/dashboard" element={<BandDashboardPage />} />
       <Route path="/band/place" element={<SearchPlacePage />} />
       <Route path="/band/place/filter" element={<PlaceFilterPage />} />
+      <Route path="/band/place/:placeId" element={<PlaceDetailPage />} />
     </Routes>
   );
 }
