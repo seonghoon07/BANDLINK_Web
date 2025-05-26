@@ -5,6 +5,7 @@ interface RoomItemProps {
   price: number;
   description: string;
   imgUrl: string;
+  onClick: () => void;
 }
 
 export default function RoomItem({
@@ -12,9 +13,10 @@ export default function RoomItem({
   price,
   description,
   imgUrl,
+  onClick,
 }: RoomItemProps) {
   return (
-    <div className={S.roomContainer}>
+    <div className={S.roomContainer} onClick={onClick}>
       <div className={S.roomInfoWrapper}>
         <p className={S.roomname}>{roomname}</p>
         <p className={S.price}>

@@ -25,24 +25,28 @@ export default function PlaceDetail() {
             price={140000}
             description={'설명입니다'}
             imgUrl={'https://picsum.photos/400'}
+            onClick={() => navigate('/band/place/1/room/1/reserve')}
           />
           <RoomItem
             roomname={'[ROOM X] 합주실 1'}
             price={140000}
             description={'설명입니다'}
             imgUrl={'https://picsum.photos/400'}
+            onClick={() => navigate('/band/place/1/room/1/reserve')}
           />
           <RoomItem
             roomname={'[ROOM X] 합주실 1'}
             price={140000}
             description={'설명입니다'}
             imgUrl={'https://picsum.photos/400'}
+            onClick={() => navigate('/band/place/1/room/1/reserve')}
           />
           <RoomItem
             roomname={'[ROOM X] 합주실 1'}
             price={140000}
             description={'설명입니다'}
             imgUrl={'https://picsum.photos/400'}
+            onClick={() => navigate('/band/place/1/room/1/reserve')}
           />
         </div>
       </div>
