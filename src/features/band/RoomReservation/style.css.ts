@@ -19,7 +19,7 @@ export const roomReservationHeader = style({
 
 export const contentContainer = style({
   ...flex.COLUMN_FLEX,
-  paddingBottom: '40px',
+  paddingBottom: '32px',
   gap: '16px',
 });
 
@@ -155,4 +155,24 @@ export const selected = style({
 
 export const unselected = style({
   backgroundColor: theme.yellow['900'],
+});
+
+export const subDescriptionContainer = style({
+  ...flex.COLUMN_FLEX,
+  gap: '12px',
+});
+
+export const subDescriptionTitle = style({
+  ...font.s2,
+  color: theme.white,
+});
+
+export const subDescription = style({
+  ...flex.FLEX,
+  width: '100%',
+  padding: '12px',
+  borderRadius: '8px',
+  backgroundColor: theme.gray['800'],
+  ...font.p2,
+  color: theme.gray['200'],
 });

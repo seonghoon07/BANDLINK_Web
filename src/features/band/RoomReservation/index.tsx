@@ -4,6 +4,7 @@ import { ArrowIcon } from '@/assets';
 import { useNavigate } from 'react-router-dom';
 import Calendar from './components/Calendar/Calendar';
 import TimeSlot from '@/features/band/RoomReservation/components/TimeSlot';
+import Button from '@/components/common/Button';
 
 export default function RoomReservation() {
   const navigate = useNavigate();
@@ -30,6 +31,15 @@ export default function RoomReservation() {
         </div>
         <div className={S.deviderLine} />
         <TimeSlot />
+        <div className={S.deviderLine} />
+        <div className={S.subDescriptionContainer}>
+          <p className={S.subDescriptionTitle}>부가설명</p>
+          <div className={S.subDescription}>부가설명입니다</div>
+        </div>
+        <div className={S.deviderLine} />
+        <Button size="lg" type="submit" color="primary">
+          예매하기
+        </Button>
       </div>
       <NavigationBar />
     </div>
