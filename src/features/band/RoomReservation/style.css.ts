@@ -1,4 +1,4 @@
-import { style } from '@vanilla-extract/css';
+import { style, styleVariants } from '@vanilla-extract/css';
 import { flex } from '@/shared/styles/flex.css';
 import theme from '@/shared/styles/theme.css';
 import { font } from '@/shared/styles/font.css';
@@ -60,4 +60,99 @@ export const deviderLine = style({
   backgroundColor: theme.gray['700'],
 });
 
-export const calendarLayout = style({});
+export const timeSlotContainer = style({
+  ...flex.COLUMN_FLEX,
+  gap: '8px',
+  width: '100%',
+});
+
+export const timeSlotWrapper = style({
+  ...flex.FLEX,
+  alignItems: 'end',
+  gap: '1px',
+  width: '100%',
+  overflowX: 'auto',
+  '::-webkit-scrollbar': {
+    display: 'none',
+  },
+});
+
+export const timeSlot = style({
+  ...flex.COLUMN_FLEX,
+  gap: '8px',
+});
+
+export const timeLabel = style({
+  ...font.caption,
+  color: theme.white,
+});
+
+export const timeBlockContainer = style({
+  ...flex.COLUMN_FLEX,
+  gap: '4px',
+  width: '52px',
+});
+
+export const time = style({
+  ...font.caption,
+  color: theme.gray['300'],
+});
+
+export const timeBlock = style({
+  height: '40px',
+  backgroundColor: theme.yellow[900],
+});
+
+export const roundedLeft = style({
+  borderTopLeftRadius: '4px',
+  borderBottomLeftRadius: '4px',
+});
+
+export const roundedRight = style({
+  borderTopRightRadius: '4px',
+  borderBottomRightRadius: '4px',
+});
+
+export const labelContainer = style({
+  ...flex.FLEX,
+  gap: '12px',
+});
+
+export const labelWrapper = style({
+  ...flex.FLEX,
+  gap: '4px',
+});
+
+export const labelColorBox = styleVariants({
+  selected: {
+    width: '12px',
+    height: '12px',
+    borderRadius: '4px',
+    backgroundColor: theme.yellow['500'],
+  },
+  unselected: {
+    width: '12px',
+    height: '12px',
+    borderRadius: '4px',
+    backgroundColor: theme.yellow['900'],
+  },
+  closed: {
+    width: '12px',
+    height: '12px',
+    borderRadius: '4px',
+    backgroundColor: theme.gray['700'],
+  },
+});
+
+export const labelText = style({
+  ...font.caption,
+  color: theme.white,
+});
+
+export const selected = style({
+  backgroundColor: theme.yellow['500'],
+});
+
+export const unselected = style({
+  backgroundColor: theme.yellow['900'],
+});

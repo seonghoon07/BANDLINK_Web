@@ -3,6 +3,7 @@ import NavigationBar from '@/components/layout/NavigationBar';
 import { ArrowIcon } from '@/assets';
 import { useNavigate } from 'react-router-dom';
 import Calendar from './components/Calendar/Calendar';
+import TimeSlot from '@/features/band/RoomReservation/components/TimeSlot';
 
 export default function RoomReservation() {
   const navigate = useNavigate();
@@ -24,9 +25,11 @@ export default function RoomReservation() {
           </p>
         </div>
         <div className={S.deviderLine} />
-        <div className={S.calendarLayout}>
+        <div>
           <Calendar />
         </div>
+        <div className={S.deviderLine} />
+        <TimeSlot />
       </div>
       <NavigationBar />
     </div>
