@@ -1,5 +1,5 @@
 import * as S from './style.css';
-import UserRole from '@/components/user/UserRole';
+import UserRole from '@/components/UserRole';
 import { role } from '@/shared/libs/role';
 import { useState } from 'react';
 

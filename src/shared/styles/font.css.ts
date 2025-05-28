@@ -48,7 +48,7 @@ export const font = {
   p1: {
     fontSize: '16px',
     lineHeight: '120%',
-    fontWeight: 500,
+    fontWeight: 400,
   },
   p2: {
     fontSize: '15px',

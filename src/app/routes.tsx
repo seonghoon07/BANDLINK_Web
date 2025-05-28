@@ -1,25 +1,44 @@
 import { Route, Routes } from 'react-router-dom';
-import StartPage from '@/pages/StartPage';
-import ChooseRole from '@/pages/ChooseRole';
-import SignupInfo from '@/pages/SignupInfo';
-import FanDashboard from '@/pages/FanDashboard';
-import SearchPerformance from '@/pages/SearchPerformance';
-import PerformanceDetail from '@/pages/PerformanceDetail';
-import TicketHistory from '@/pages/TicketHistory';
-import ProfilePage from '@/pages/ProfilePage';
+import {
+  StartPage,
+  ProfilePage,
+  SignupInfoPage,
+  ChooseRolePage,
+} from '@/pages/user';
+import {
+  FanDashboardPage,
+  TicketHistoryPage,
+  SearchPerformancePage,
+  PerformanceDetailPage,
+} from '@/pages/fan';
+import {
+  BandDashboardPage,
+  SearchPlacePage,
+  PlaceFilterPage,
+  PlaceDetailPage,
+  RoomReservationPage
+} from '@/pages/band';
 
 export default function Router() {
   return (
     <Routes>
       <Route path="/" element={<StartPage />} />
-      <Route path="/role" element={<ChooseRole />} />
-      <Route path="/nickname" element={<SignupInfo />} />
-      <Route path="/bandname" element={<SignupInfo />} />
-      <Route path="/fan/dashboard" element={<FanDashboard />} />
-      <Route path="/fan/performances" element={<SearchPerformance />} />
-      <Route path="/fan/performances/1" element={<PerformanceDetail />} />
-      <Route path="/fan/tickets" element={<TicketHistory />} />
+      <Route path="/role" element={<ChooseRolePage />} />
+      <Route path="/nickname" element={<SignupInfoPage />} />
+      <Route path="/bandname" element={<SignupInfoPage />} />
+      <Route path="/fan/dashboard" element={<FanDashboardPage />} />
+      <Route path="/fan/performances" element={<SearchPerformancePage />} />
+      <Route path="/fan/performances/1" element={<PerformanceDetailPage />} />
+      <Route path="/fan/tickets" element={<TicketHistoryPage />} />
       <Route path="/profile" element={<ProfilePage />} />
+      <Route path="/band/dashboard" element={<BandDashboardPage />} />
+      <Route path="/band/place" element={<SearchPlacePage />} />
+      <Route path="/band/place/filter" element={<PlaceFilterPage />} />
+      <Route path="/band/place/:placeId" element={<PlaceDetailPage />} />
+      <Route
+        path="/band/place/:placeId/room/:roomId/reserve"
+        element={<RoomReservationPage />}
+      />
     </Routes>
   );
 }
