@@ -16,8 +16,9 @@ import {
   SearchPlacePage,
   PlaceFilterPage,
   PlaceDetailPage,
-  RoomReservationPage
+  RoomReservationPage,
 } from '@/pages/band';
+import MyPerformancePage from '@/pages/band/MyPerformancePage';
 
 export default function Router() {
   return (
@@ -39,6 +40,7 @@ export default function Router() {
         path="/band/place/:placeId/room/:roomId/reserve"
         element={<RoomReservationPage />}
       />
+      <Route path="/band/performance" element={<MyPerformancePage />} />
     </Routes>
   );
 }
