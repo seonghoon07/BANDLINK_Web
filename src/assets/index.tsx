@@ -12,4 +12,6 @@ export { default as CalendarIcon } from './icons/calendar.svg?react';
 export { default as FilterIcon } from './icons/filter.svg?react';
 export { default as CloseIcon } from './icons/close.svg?react';
 export { default as CheckIcon } from './icons/check.svg?react';
+export { default as AddIcon } from './icons/add.svg?react';
+export { default as ArrowCenterIcon } from './icons/arrowCenter.svg?react';
 export { default as BusanRockFestaImg } from './imgs/busanRockFesta.jpg';

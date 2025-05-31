@@ -3,8 +3,10 @@ import NavigationBar from '@/components/layout/NavigationBar';
 import MyPerformanceCard from './components/myPerformanceCard';
 import { BusanRockFestaImg } from '@/assets';
 import Button from '@/components/common/Button';
+import { useNavigate } from 'react-router-dom';
 
 export default function MyPerformance() {
+  const navigate = useNavigate();
   return (
     <div className={S.myPerformanceContainer}>
       <header className={S.titleHeader}>내 공연</header>
@@ -74,7 +76,7 @@ export default function MyPerformance() {
         />
       </div>
       <div className={S.createBtnWrapper}>
-        <Button size="lg" type="button" color="primary">
+        <Button size="lg" type="button" color="primary" onClick={() => navigate('/band/performance/create')}>
           공연 생성
         </Button>
       </div>
