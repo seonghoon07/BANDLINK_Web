@@ -27,9 +27,8 @@ export default function PerformanceCreate() {
     name: string;
     address: string;
   } | null>(null);
+  const [isStartTimeOpen, setIsStartTimeOpen] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
-
-  console.log(isDrowdownOpen);
 
   const toggleDropDown = () => setIsDrowdownOpen((prev) => !prev);
 
@@ -127,7 +126,19 @@ export default function PerformanceCreate() {
             <p className={S.availableTime}>
               총 <span className={S.yellowColor}>4시간</span> 사용가능
             </p>
-            <TimePicker />
+            <div className={S.startTimeContainer}>
+              <p className={S.borrowText}>대여 시작</p>
+              <div className={S.selectTimeContainer}>
+                <p className={S.selectTime}>4. 2. (수) 13시 30분</p>
+                <div
+                  className={S.timeDropdownIcon}
+                  onClick={() => setIsStartTimeOpen(!isStartTimeOpen)}
+                >
+                  <ArrowCenterIcon width={20} height={20} />
+                </div>
+              </div>
+            </div>
+            {isStartTimeOpen && <TimePicker />}
           </div>
         </div>
       </div>

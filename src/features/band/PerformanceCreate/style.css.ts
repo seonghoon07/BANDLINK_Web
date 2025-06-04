@@ -162,3 +162,25 @@ export const availableTime = style({
 export const yellowColor = style({
   color: theme.yellow['500'],
 });
+
+export const startTimeContainer = style({
+  ...flex.BETWEEN,
+  width: '100%',
+});
+
+export const borrowText = style({
+  ...font.p1,
+  color: theme.white,
+});
+
+export const selectTimeContainer = style({
+  ...flex.FLEX,
+  gap: '12px',
+});
+
+export const selectTime = style({
+  ...font.p1,
+  color: theme.white,
+});
+
+export const timeDropdownIcon = style({});
