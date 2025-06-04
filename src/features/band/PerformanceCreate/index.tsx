@@ -4,6 +4,7 @@ import NavigationBar from '@/components/layout/NavigationBar';
 import { AddIcon, ArrowCenterIcon, ArrowIcon } from '@/assets';
 import { useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
+import TimePicker from '@/features/band/PerformanceCreate/TimePicker';
 
 const PLACE_OPTIONS = [
   {
@@ -122,6 +123,12 @@ export default function PerformanceCreate() {
         </div>
         <div className={S.infoContainer}>
           <p className={S.label}>시간</p>
+          <div className={S.timeWrapper}>
+            <p className={S.availableTime}>
+              총 <span className={S.yellowColor}>4시간</span> 사용가능
+            </p>
+            <TimePicker />
+          </div>
         </div>
       </div>
       <NavigationBar />

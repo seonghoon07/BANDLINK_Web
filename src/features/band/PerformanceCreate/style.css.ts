@@ -148,3 +148,17 @@ export const address = style({
   ...font.caption,
   color: theme.gray['400'],
 });
+
+export const timeWrapper = style({
+  ...flex.COLUMN_FLEX,
+  gap: '20px',
+});
+
+export const availableTime = style({
+  ...font.s1,
+  color: theme.white,
+});
+
+export const yellowColor = style({
+  color: theme.yellow['500'],
+});
