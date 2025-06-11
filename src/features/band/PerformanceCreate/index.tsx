@@ -5,6 +5,8 @@ import { AddIcon, ArrowCenterIcon, ArrowIcon } from '@/assets';
 import { useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import TimePicker from '@/features/band/PerformanceCreate/TimePicker';
+import { useAtomValue } from 'jotai';
+import { rentalEndTimeAtom, rentalStartTimeAtom } from '@/shared/store/atom';
 
 const PLACE_OPTIONS = [
   {
@@ -28,6 +30,9 @@ export default function PerformanceCreate() {
     address: string;
   } | null>(null);
   const [isStartTimeOpen, setIsStartTimeOpen] = useState(false);
+  const [isEndTimeOpen, setIsEndTimeOpen] = useState(false);
+  const startTime = useAtomValue(rentalStartTimeAtom);
+  const endTime = useAtomValue(rentalEndTimeAtom);
   const inputRef = useRef<HTMLInputElement>(null);
 
   const toggleDropDown = () => setIsDrowdownOpen((prev) => !prev);
@@ -126,19 +131,40 @@ export default function PerformanceCreate() {
             <p className={S.availableTime}>
               총 <span className={S.yellowColor}>4시간</span> 사용가능
             </p>
-            <div className={S.startTimeContainer}>
+            <div
+              className={S.startTimeContainer}
+              onClick={() => setIsStartTimeOpen(!isStartTimeOpen)}
+            >
               <p className={S.borrowText}>대여 시작</p>
               <div className={S.selectTimeContainer}>
-                <p className={S.selectTime}>4. 2. (수) 13시 30분</p>
-                <div
-                  className={S.timeDropdownIcon}
-                  onClick={() => setIsStartTimeOpen(!isStartTimeOpen)}
-                >
+                <p className={S.selectTime}>
+                  {startTime
+                    ? `${startTime.date} ${startTime.hour}시 ${startTime.minute}분`
+                    : '시간을 선택해주세요'}
+                </p>
+                <div className={S.timeDropdownIcon}>
                   <ArrowCenterIcon width={20} height={20} />
                 </div>
               </div>
             </div>
-            {isStartTimeOpen && <TimePicker />}
+            {isStartTimeOpen && <TimePicker type="start" />}
+            <div
+              className={S.startTimeContainer}
+              onClick={() => setIsEndTimeOpen(!isEndTimeOpen)}
+            >
+              <p className={S.borrowText}>대여 종료</p>
+              <div className={S.selectTimeContainer}>
+                <p className={S.selectTime}>
+                  {endTime
+                    ? `${endTime.date} ${endTime.hour}시 ${endTime.minute}분`
+                    : '시간을 선택해주세요'}
+                </p>
+                <div className={S.timeDropdownIcon}>
+                  <ArrowCenterIcon width={20} height={20} />
+                </div>
+              </div>
+            </div>
+            {isEndTimeOpen && <TimePicker type="end" />}
           </div>
         </div>
       </div>
