@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import TimePicker from '@/features/band/PerformanceCreate/TimePicker';
 import { useAtomValue } from 'jotai';
 import { rentalEndTimeAtom, rentalStartTimeAtom } from '@/shared/store/atom';
+import Button from '@/components/common/Button';
 
 const PLACE_OPTIONS = [
   {
@@ -18,6 +19,8 @@ const PLACE_OPTIONS = [
     address: '서울 마포구 서교동',
   },
 ];
+
+const price = 15000;
 
 export default function PerformanceCreate() {
   const navigate = useNavigate();
@@ -170,10 +173,13 @@ export default function PerformanceCreate() {
         <div className={S.infoContainer}>
           <p className={S.label}>가격</p>
           <div className={S.priceInput}>
-            <p className={S.price}>5000</p>
+            <p className={S.price}>{price.toLocaleString()}</p>
             <p className={S.wonText}>₩</p>
           </div>
         </div>
+        <Button type="submit" color="primary" size="lg">
+          공연 생성
+        </Button>
       </div>
       <NavigationBar />
     </div>
