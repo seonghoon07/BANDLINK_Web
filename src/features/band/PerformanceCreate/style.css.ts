@@ -184,3 +184,21 @@ export const selectTime = style({
 });
 
 export const timeDropdownIcon = style({});
+
+export const priceInput = style({
+  ...flex.BETWEEN,
+  width: '100%',
+  padding: '12px 16px',
+  backgroundColor: theme.gray['800'],
+  borderRadius: '4px',
+});
+
+export const price = style({
+  ...font.p1,
+  color: theme.white,
+});
+
+export const wonText = style({
+  ...font.p1,
+  color: theme.yellow['500'],
+});

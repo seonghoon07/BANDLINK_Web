@@ -167,6 +167,13 @@ export default function PerformanceCreate() {
             {isEndTimeOpen && <TimePicker type="end" />}
           </div>
         </div>
+        <div className={S.infoContainer}>
+          <p className={S.label}>가격</p>
+          <div className={S.priceInput}>
+            <p className={S.price}>5000</p>
+            <p className={S.wonText}>₩</p>
+          </div>
+        </div>
       </div>
       <NavigationBar />
     </div>
