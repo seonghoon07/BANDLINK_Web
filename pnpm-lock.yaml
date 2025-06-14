@@ -41,15 +41,15 @@ importers:
       jotai:
         specifier: ^2.12.4
         version: 2.12.4(@types/react@19.1.2)(react@19.1.0)
-      ko:
-        specifier: link:@fullcalendar/core/locales/ko
-        version: link:@fullcalendar/core/locales/ko
       react:
         specifier: ^19.0.0
         version: 19.1.0
       react-dom:
         specifier: ^19.0.0
         version: 19.1.0(react@19.1.0)
+      react-mobile-picker:
+        specifier: ^1.1.2
+        version: 1.1.2(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       react-range:
         specifier: ^1.10.0
         version: 1.10.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
@@ -1498,6 +1498,12 @@ packages:
     resolution: {integrity: sha512-Xs1hdnE+DyKgeHJeJznQmYMIBG3TKIHJJT95Q58nHLSrElKlGQqDTR2HQ9fx5CN/Gk6Vh/kupBTDLU11/nDk/g==}
     peerDependencies:
       react: ^19.1.0
+
+  react-mobile-picker@1.1.2:
+    resolution: {integrity: sha512-U3NQj2O9B6LzOvKIv/AOMhjXUb32S1rWLrcPiJmt1/2Ue5J9gsLC5I0npoRvFl94LOcRCnVMisNR864wq0Makg==}
+    peerDependencies:
+      react: ^16 || ^17 || ^18 || ^19
+      react-dom: ^16 || ^17 || ^18 || ^19
 
   react-range@1.10.0:
     resolution: {integrity: sha512-kDo0LiBUHIQIP8menx0UoxTnHr7UXBYpIYl/DR9jCaO1o29VwvCLpkP/qOTNQz5hkJadPg1uEM07XJcJ1XGoKw==}
@@ -3171,6 +3177,11 @@ snapshots:
     dependencies:
       react: 19.1.0
       scheduler: 0.26.0
+
+  react-mobile-picker@1.1.2(react-dom@19.1.0(react@19.1.0))(react@19.1.0):
+    dependencies:
+      react: 19.1.0
+      react-dom: 19.1.0(react@19.1.0)
 
   react-range@1.10.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0):
     dependencies:
