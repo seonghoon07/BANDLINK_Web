@@ -5,7 +5,7 @@ import { navItems } from '@/shared/libs/navItems';
 
 const getRoleFromPath = (pathname: string): keyof typeof navItems => {
   if (pathname.startsWith('/band')) return 'band';
-  if (pathname.startsWith('/host')) return 'host';
+  if (pathname.startsWith('/spaceOwner')) return 'spaceOwner';
   return 'fan';
 };
 
