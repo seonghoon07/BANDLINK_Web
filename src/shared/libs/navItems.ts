@@ -21,10 +21,10 @@ export const navItems = {
     { label: '공연', icon: NoteIcon, href: '/band/performance' },
     { label: '마이페이지', icon: PersonIcon, href: '/profile' },
   ],
-  host: [
-    { label: '홈', icon: HomeIcon, href: '/host/dashboard' },
-    { label: '공간', icon: PlaceIcon, href: '/host/place' },
-    { label: '예약 관리', icon: CalendarIcon, href: '/host/schedule' },
+  spaceOwner: [
+    { label: '홈', icon: HomeIcon, href: '/spaceOwner/dashboard' },
+    { label: '공간', icon: PlaceIcon, href: '/spaceOwner/place' },
+    { label: '예약 관리', icon: CalendarIcon, href: '/spaceOwner/schedule' },
     { label: '마이페이지', icon: PersonIcon, href: '/profile' },
   ],
 } as const;
