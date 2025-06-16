@@ -1,4 +1,4 @@
-import * as S from '../style.css';
+import * as S from './style.css';
 
 interface RoomItemProps {
   roomname: string;
