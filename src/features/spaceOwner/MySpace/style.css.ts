@@ -8,7 +8,7 @@ export const container = style({
   minHeight: '100vh',
   ...flex.COLUMN_FLEX,
   backgroundColor: theme.gray['900'],
-  padding: '0px 24px 177px 24px',
+  padding: '0px 24px 201px 24px',
 });
 
 export const fixBtnContainer = style({
@@ -26,6 +26,7 @@ export const contentContainer = style({
   height: '100%',
   ...flex.COLUMN_FLEX,
   gap: '24px',
+  flex: '1',
 });
 
 export const headerContainer = style({
@@ -81,4 +82,15 @@ export const redColor = style({
 export const roomWrapper = style({
   width: '100%',
   ...flex.COLUMN_FLEX,
+});
+
+export const emptyRoomContainer = style({
+  width: '100%',
+  ...flex.CENTER,
+  flex: '1',
+});
+
+export const emptyRoomText = style({
+  ...font.p1,
+  color: theme.gray['300'],
 });

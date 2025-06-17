@@ -32,7 +32,7 @@ export const rooomImage = style({
   borderRadius: '8px',
 });
 
-export const mainInfoWrapper= style({
+export const mainInfoWrapper = style({
   width: '100%',
   ...flex.COLUMN_FLEX,
   gap: '8px',
