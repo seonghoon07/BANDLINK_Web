@@ -21,7 +21,7 @@ import {
   PerformanceCreatePage,
 } from '@/pages/band';
 
-import { MySpacePage, SpaceOwnerDashboardPage } from '@/pages/spaceOwner';
+import { MySpacePage, RoomPage, SpaceOwnerDashboardPage } from '@/pages/spaceOwner';
 
 export default function Router() {
   return (
@@ -53,6 +53,7 @@ export default function Router() {
         element={<SpaceOwnerDashboardPage />}
       />
       <Route path="spaceOwner/space" element={<MySpacePage />} />
+      <Route path="spaceOwner/space/room/:roomId" element={<RoomPage />} />
     </Routes>
   );
 }

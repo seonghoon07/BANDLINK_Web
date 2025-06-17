@@ -3,8 +3,10 @@ import NavigationBar from '@/components/layout/NavigationBar';
 import Button from '@/components/common/Button';
 import { SpaceImage } from '@/assets';
 import RoomItem from '@/components/RoomItem';
+import { useNavigate } from 'react-router-dom';
 
 export default function MySpace() {
+  const navigate = useNavigate();
   return (
     <div className={S.container}>
       <div className={S.contentContainer}>
@@ -31,7 +33,7 @@ export default function MySpace() {
               '설명입니다설명입니다설명입니다설명입니다설명입니다설명입니다설명입니다설명입니다'
             }
             imgUrl={SpaceImage}
-            onClick={() => {}}
+            onClick={() => navigate('/spaceOwner/space/room/1')}
           />
           <RoomItem
             roomname={'[ROOM X] 합주실 1'}
