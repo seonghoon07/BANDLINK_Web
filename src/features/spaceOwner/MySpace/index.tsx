@@ -1,6 +1,5 @@
 import * as S from './style.css';
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
 import NavigationBar from '@/components/layout/NavigationBar';
 import Button from '@/components/common/Button';
 import { SpaceImage } from '@/assets';
@@ -8,7 +7,7 @@ import RoomItem from '@/components/RoomItem';
 
 export default function MySpace() {
   const navigate = useNavigate();
-  const [isRoom, setIsRoom] = useState(false);
+  const isRoom = false;
 
   return (
     <div className={S.container}>
@@ -76,7 +75,16 @@ export default function MySpace() {
         )}
       </div>
       <div className={S.fixBtnContainer}>
-        <Button type="button" size="lg" color="primary">
+        <Button
+          type="button"
+          size="lg"
+          color="primary"
+          onClick={() =>
+            isRoom
+              ? navigate('/spaceOwner/space/create')
+              : navigate('/spaceOwner/space/create')
+          }
+        >
           {isRoom ? '수정하기' : '등록하기'}
         </Button>
       </div>
