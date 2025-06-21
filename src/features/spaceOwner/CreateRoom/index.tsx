@@ -3,16 +3,11 @@ import * as S from './style.css';
 import NavigationBar from '@/components/layout/NavigationBar';
 import { BusinessDay } from '@/features/spaceOwner/CreateRoom/components/BusinessDay';
 import { PlaceType } from '@/features/spaceOwner/CreateRoom/components/PlaceType';
-import { AddIcon, ArrowCenterIcon, ArrowIcon, SpaceImage } from '@/assets';
+import { AddIcon, ArrowIcon, SpaceImage } from '@/assets';
 import { useNavigate } from 'react-router-dom';
-import BusinessTimePicker from './components/BusinessTimePicker';
 import Button from '@/components/common/Button';
 import RoomItem from '@/components/RoomItem';
-
-type selectedTimeType = {
-  hour: string;
-  minute: string;
-};
+import BusinessTime from '@/features/spaceOwner/CreateRoom/components/BusinessTime';
 
 export default function CreateRoom() {
   const placeType = ['합주실', '소극장'];
@@ -25,17 +20,6 @@ export default function CreateRoom() {
   const [selectedBusinessDays, setSelectedBusinessDays] = useState<string[]>(
     []
   );
-  const [selectedTimes, setSelectedTimes] = useState<{
-    start: selectedTimeType;
-    end: selectedTimeType;
-  }>({
-    start: { hour: '00', minute: '00' },
-    end: { hour: '00', minute: '00' },
-  });
-  const [isTimeClick, setIsTimeClick] = useState<{
-    start: boolean;
-    end: boolean;
-  }>({ start: false, end: false });
   const [isRoomExists] = useState<boolean>(true);
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -65,38 +49,6 @@ export default function CreateRoom() {
       prev.includes(day) ? prev.filter((item) => item !== day) : [...prev, day]
     );
   };
-
-  const handleTimeChange = (
-    type: 'start' | 'end',
-    hour: string,
-    minute: string
-  ) => {
-    setSelectedTimes((prev) => ({
-      ...prev,
-      [type]: { hour, minute },
-    }));
-  };
-
-  const toggleTimeClick = (type: 'start' | 'end') => {
-    setIsTimeClick((prev) => ({ ...prev, [type]: !prev[type] }));
-  };
-
-  const renderTimePicker = (type: 'start' | 'end') => (
-    <BusinessTimePicker
-      onTimeChange={(hour, minute) => handleTimeChange(type, hour, minute)}
-    />
-  );
-
-  const renderArrowIcon = (type: 'start' | 'end') => (
-    <ArrowCenterIcon
-      width={20}
-      height={20}
-      style={{
-        transform: isTimeClick[type] ? 'rotate(180deg)' : 'rotate(0deg)',
-        transition: 'transform 0.3s ease',
-      }}
-    />
-  );
 
   return (
     <div className={S.container}>
@@ -163,41 +115,14 @@ export default function CreateRoom() {
           </div>
         </div>
         <div className={S.dividerLine} />
-        <div className={S.categoryContainer}>
-          <p className={S.categoryLabel}>영업시간</p>
-          <div className={S.businessTimeContainer}>
-            <div
-              className={S.startTimeWrapper}
-              onClick={() => toggleTimeClick('start')}
-            >
-              <p className={S.startTimeLabel}>영업 시작</p>
-              <div className={S.timeWrapper}>
-                <p
-                  className={S.time}
-                >{`${selectedTimes.start.hour}시 ${selectedTimes.start.minute}분`}</p>
-                {renderArrowIcon('start')}
-              </div>
-            </div>
-            {isTimeClick.start && renderTimePicker('start')}
-            <div
-              className={S.startTimeWrapper}
-              onClick={() => toggleTimeClick('end')}
-            >
-              <p className={S.startTimeLabel}>영업 종료</p>
-              <div className={S.timeWrapper}>
-                <p
-                  className={S.time}
-                >{`${selectedTimes.end.hour}시 ${selectedTimes.end.minute}분`}</p>
-                {renderArrowIcon('end')}
-              </div>
-            </div>
-            {isTimeClick.end && renderTimePicker('end')}
-          </div>
-        </div>
+        <BusinessTime />
         <div className={S.dividerLine} />
         <div className={S.roomWrapper}>
           <div className={S.room}>
-            <div className={S.createRoomContainer}>
+            <div
+              className={S.createRoomContainer}
+              onClick={() => navigate('/spaceOwner/space/create/room')}
+            >
               <AddIcon width={32} height={32} />
               <p className={S.createRoomText}>방 추가</p>
             </div>
