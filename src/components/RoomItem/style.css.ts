@@ -32,7 +32,6 @@ export const price = style({
   color: theme.white,
 });
 
-
 export const priceBold = style({
   ...font.p3,
   fontWeight: 600,
