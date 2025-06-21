@@ -1,5 +1,5 @@
 import * as S from './style.css';
-import BusinessTimePicker from '@/features/spaceOwner/CreateRoom/components/BusinessTimePicker';
+import BusinessTimePicker from '@/features/spaceOwner/CreateSpace/components/BusinessTimePicker';
 import { ArrowCenterIcon } from '@/assets';
 import { useState } from 'react';
 

@@ -1,15 +1,15 @@
 import React, { useRef, useState } from 'react';
 import * as S from './style.css';
 import NavigationBar from '@/components/layout/NavigationBar';
-import { BusinessDay } from '@/features/spaceOwner/CreateRoom/components/BusinessDay';
-import { PlaceType } from '@/features/spaceOwner/CreateRoom/components/PlaceType';
+import { BusinessDay } from '@/features/spaceOwner/CreateSpace/components/BusinessDay';
+import { PlaceType } from '@/features/spaceOwner/CreateSpace/components/PlaceType';
 import { AddIcon, ArrowIcon, SpaceImage } from '@/assets';
 import { useNavigate } from 'react-router-dom';
 import Button from '@/components/common/Button';
 import RoomItem from '@/components/RoomItem';
-import BusinessTime from '@/features/spaceOwner/CreateRoom/components/BusinessTime';
+import BusinessTime from '@/features/spaceOwner/CreateSpace/components/BusinessTime';
 
-export default function CreateRoom() {
+export default function CreateSpace() {
   const placeType = ['합주실', '소극장'];
   const weeks = ['월', '화', '수', '목', '금', '토', '일'];
   const navigate = useNavigate();
