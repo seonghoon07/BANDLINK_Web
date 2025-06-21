@@ -1,6 +1,6 @@
 import { style } from '@vanilla-extract/css';
-import theme from '@/shared/styles/theme.css';
 import { flex } from '@/shared/styles/flex.css';
+import theme from '@/shared/styles/theme.css';
 import { font } from '@/shared/styles/font.css';
 
 export const container = style({
@@ -68,7 +68,7 @@ export const categoryLabel = style({
   color: theme.gray['200'],
 });
 
-export const placeNameInput = style({
+export const roomNameInput = style({
   width: '100%',
   backgroundColor: theme.gray['800'],
   borderRadius: '4px',
@@ -81,90 +81,43 @@ export const placeNameInput = style({
   },
 });
 
-export const placeTypeWrapper = style({
-  ...flex.FLEX,
-  gap: '12px',
-});
-
-export const placeType = style({
-  padding: '12px 20px',
-  borderRadius: '8px',
-  border: `1px solid ${theme.gray['700']}`,
-});
-
-export const selectedBorder = style({
-  border: `1px solid ${theme.yellow['500']}` + '!important',
-});
-
-export const selectedColor = style({
-  color: theme.yellow['500'] + '!important',
-});
-
-export const placeTypeText = style({
-  ...font.btn3,
-  color: theme.white,
-});
-
-export const businessDay = style({
+export const roomDescriptionInput = style({
   width: '100%',
-  ...flex.CENTER,
-  padding: '12px 0px 12px 0',
-  borderRadius: '8px',
-  border: `1px solid ${theme.gray['700']}`,
-});
-
-export const businessDayText = style({
-  ...font.btn3,
-  color: theme.white,
-});
-
-export const roomWrapper = style({
-  width: '100%',
-  ...flex.COLUMN_FLEX,
-});
-
-export const room = style({
-  width: '100%',
-  ...flex.BETWEEN,
-  padding: '12px 0',
-});
-
-export const createRoomContainer = style({
-  width: '100%',
-  ...flex.VERTICAL,
-  gap: '28px',
-  padding: '24px 28px',
+  minHeight: '240px',
   backgroundColor: theme.gray['800'],
-  borderRadius: '8px',
-  border: `1px solid ${theme.gray['600']}`,
-});
-
-export const createRoomText = style({
-  ...font.s2,
+  borderRadius: '4px',
+  padding: '12px 16px',
   color: theme.white,
-});
-
-export const roomPlaceholder = style({
-  width: '100%',
-  ...flex.BETWEEN,
-  padding: '12px 0',
-});
-
-export const roomPlaceholderTextWrapper = style({
-  ...flex.CENTER,
-  width: '100%',
-  backgroundColor: theme.gray['800'],
-  padding: '32px',
-  borderRadius: '8px',
-});
-
-export const noRoomText = style({
   ...font.p1,
-  color: theme.gray['400'],
+
+  '::placeholder': {
+    color: theme.gray['400'],
+  },
 });
 
-export const dividerLine = style({
+export const roomPriceContainer = style({
   width: '100%',
-  height: '1px',
-  backgroundColor: theme.gray['700'],
+  position: 'relative',
+});
+
+export const roomPriceInput = style({
+  width: '100%',
+  padding: '12px 16px',
+  borderRadius: '4px',
+  backgroundColor: theme.gray['800'],
+  ...font.p1,
+  color: theme.white,
+
+  '::placeholder': {
+    color: theme.gray['400'],
+  },
+});
+
+export const priceIconText = style({
+  ...font.p1,
+  color: theme.yellow['500'],
+  position: 'absolute',
+  top: '50%',
+  right: '16px',
+  transform: 'translate(-50%, -50%)',
 });

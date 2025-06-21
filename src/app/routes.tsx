@@ -22,6 +22,7 @@ import {
 } from '@/pages/band';
 
 import {
+  CreatePlacePage,
   CreateRoomPage,
   MySpacePage,
   RoomPage,
@@ -59,7 +60,8 @@ export default function Router() {
       />
       <Route path="spaceOwner/space" element={<MySpacePage />} />
       <Route path="spaceOwner/space/room/:roomId" element={<RoomPage />} />
-      <Route path="spaceOwner/space/create" element={<CreateRoomPage />} />
+      <Route path="spaceOwner/space/create" element={<CreatePlacePage />} />
+      <Route path="spaceOwner/space/create/room" element={<CreateRoomPage />} />
     </Routes>
   );
 }
