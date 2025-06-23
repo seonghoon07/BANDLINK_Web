@@ -53,7 +53,7 @@ export default function CreateSpace() {
   return (
     <div className={S.container}>
       <header className={S.header}>
-        <ArrowIcon onClick={() => navigate(-1)} />
+        <ArrowIcon onClick={() => navigate('/spaceOwner/space')} />
       </header>
       <div className={S.contentContainer}>
         <div className={S.imageUploadContainer} onClick={handleImageUploadBtn}>
