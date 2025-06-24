@@ -24,7 +24,7 @@ export const navItems = {
   spaceOwner: [
     { label: '홈', icon: HomeIcon, href: '/spaceOwner/dashboard' },
     { label: '공간', icon: PlaceIcon, href: '/spaceOwner/space' },
-    { label: '예약 관리', icon: CalendarIcon, href: '/spaceOwner/schedule' },
+    { label: '예약 관리', icon: CalendarIcon, href: '/spaceOwner/reservations' },
     { label: '마이페이지', icon: PersonIcon, href: '/profile' },
   ],
 } as const;
