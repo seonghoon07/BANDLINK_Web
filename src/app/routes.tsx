@@ -27,6 +27,7 @@ import {
   MySpacePage,
   RoomPage,
   SpaceOwnerDashboardPage,
+  ReservationsPage,
 } from '@/pages/spaceOwner';
 
 export default function Router() {
@@ -58,10 +59,14 @@ export default function Router() {
         path="/spaceOwner/dashboard"
         element={<SpaceOwnerDashboardPage />}
       />
-      <Route path="spaceOwner/space" element={<MySpacePage />} />
-      <Route path="spaceOwner/space/room/:roomId" element={<RoomPage />} />
-      <Route path="spaceOwner/space/create" element={<CreatePlacePage />} />
-      <Route path="spaceOwner/space/create/room" element={<CreateRoomPage />} />
+      <Route path="/spaceOwner/space" element={<MySpacePage />} />
+      <Route path="/spaceOwner/space/room/:roomId" element={<RoomPage />} />
+      <Route path="/spaceOwner/space/create" element={<CreatePlacePage />} />
+      <Route
+        path="/spaceOwner/space/create/room"
+        element={<CreateRoomPage />}
+      />
+      <Route path="/spaceOwner/reservations" element={<ReservationsPage />} />
     </Routes>
   );
 }
