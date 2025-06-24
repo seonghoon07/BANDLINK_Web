@@ -1,5 +1,5 @@
-import Content from '@/features/user/StartPage/Content';
+import Start from '@/features/user/Start';
 
 export default function StartPage() {
-  return <Content />;
+  return <Start />;
 }
