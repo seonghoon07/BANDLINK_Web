@@ -2,7 +2,7 @@ import * as S from './style.css';
 import NavigationBar from '@/components/layout/NavigationBar';
 import { ArrowIcon } from '@/assets';
 import { useNavigate } from 'react-router-dom';
-import RoomItem from '@/features/band/PlaceDetail/components/RoomItem';
+import RoomItem from '@/components/RoomItem';
 
 export default function PlaceDetail() {
   const navigate = useNavigate();
