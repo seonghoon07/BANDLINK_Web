@@ -1,5 +1,5 @@
 import { atom } from 'jotai';
-import { UserType } from '@/shared/types/userType';
+import { RoleType } from '@/shared/types/roleType';
 
 export type DateTimeValue = {
   date: string;
@@ -7,7 +7,7 @@ export type DateTimeValue = {
   minute: string;
 };
 
-export const userType = atom<UserType>();
+export const userType = atom<RoleType>('FAN');
 
 export const rentalStartTimeAtom = atom<DateTimeValue | null>(null);
 export const rentalEndTimeAtom = atom<DateTimeValue | null>(null);

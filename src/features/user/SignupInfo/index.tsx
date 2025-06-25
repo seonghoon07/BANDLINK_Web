@@ -5,9 +5,16 @@ import { useEffect, useState } from 'react';
 import { useAtom } from 'jotai';
 import { userType } from '@/shared/store/atom';
 import { useNavigate } from 'react-router-dom';
+import { useRegisterUserMutation } from '@/features/user/services/user.mutation';
+import { UserData, RoleType } from '@/shared/types';
 
 export default function SignupInfo() {
   const navigate = useNavigate();
+  const rolePathMap: Record<RoleType, string> = {
+    BAND: 'band',
+    FAN: 'fan',
+    PLACE_OWNER: 'spaceOwner',
+  };
   const [nickname, setNickname] = useState('');
   const [bandname, setBandname] = useState('');
   const [buttonState, setButtonState] = useState<'primary' | 'disabled'>(
@@ -16,8 +23,9 @@ export default function SignupInfo() {
   const [warningText, setWarningText] = useState('');
   const [step, setStep] = useState<1 | 2>(1);
   const [currentUserType] = useAtom(userType);
-
   const isBand = currentUserType === 'BAND';
+
+  const { mutateAsync: registerUserMutate } = useRegisterUserMutation();
 
   const validateInput = (value: string) => {
     if (value.length === 0) return { valid: false, warning: '' };
@@ -40,17 +48,27 @@ export default function SignupInfo() {
     setWarningText(warning);
   }, [nickname, bandname, step]);
 
-  const handleSignupClick = () => {
+  const handleSignupClick = async () => {
     if (isBand && step === 1) {
       setStep(2);
       return;
     }
 
-    const requestBody = isBand
+    const requestBody: UserData = isBand
       ? { nickname, bandname, role: currentUserType }
       : { nickname, role: currentUserType };
 
-    console.log('회원가입 요청:', requestBody);
+    await registerUserMutate(requestBody, {
+      onSuccess: () => {
+        const path = rolePathMap[currentUserType];
+        navigate(`/${path}/dashboard`);
+      },
+      onError: (error: any) => {
+        const message =
+          error?.response?.data?.message || '회원가입 중 에러가 발생했습니다.';
+        alert(message);
+      },
+    });
   };
 
   const inputValue = step === 1 ? nickname : bandname;

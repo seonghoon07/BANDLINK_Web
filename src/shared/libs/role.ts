@@ -1,11 +1,11 @@
-import { UserType } from '@/shared/types/userType';
+import { RoleType } from '@/shared/types/roleType';
 import Person from '@/assets/icons/person.svg?react';
 import Place from '@/assets/icons/place.svg?react';
 import Note from '@/assets/icons/note.svg?react';
 
 interface RoleItem {
   id: number;
-  type: UserType;
+  type: RoleType;
   role: string;
   roleInfo: string;
   Icon: React.FC<React.SVGProps<SVGSVGElement>>;

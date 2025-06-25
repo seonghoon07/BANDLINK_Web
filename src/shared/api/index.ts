@@ -13,15 +13,27 @@ export const customAxios = axios.create({
   timeout: 100000,
 });
 
+const plainAxios = axios.create({
+  baseURL: import.meta.env.VITE_APPLICATION_KEY,
+  timeout: 100000,
+});
+
 const refresh = async () => {
-  await deleteCookie(TOKEN.ACCESS);
+  deleteCookie(TOKEN.ACCESS);
   const refreshToken = await getRefreshToken();
-  const { data } = await customAxios.post('/auth/reissue', {
-    token: refreshToken,
-  });
-  const newAccessToken = data.accessToken;
-  await setCookie(TOKEN.ACCESS, newAccessToken);
-  return newAccessToken;
+
+  try {
+    const { data } = await plainAxios.post('/auth/refresh', {
+      refreshToken,
+    });
+
+    const newAccessToken = data.accessToken;
+    setCookie(TOKEN.ACCESS, newAccessToken);
+    return newAccessToken;
+  } catch (err) {
+    console.error('[REFRESH ERROR]', err);
+    throw err;
+  }
 };
 
 customAxios.interceptors.response.use(
@@ -34,12 +46,13 @@ customAxios.interceptors.response.use(
     }
 
     try {
-      request._retry = true;
       const newToken = await refresh();
       request.headers.Authorization = `Bearer ${newToken}`;
       return customAxios(request);
     } catch (refreshError) {
+      alert('로그인이 만료되어 다시 로그인해주세요.');
       clearCookie();
+      window.location.href = '/';
       return Promise.reject(refreshError);
     }
   }

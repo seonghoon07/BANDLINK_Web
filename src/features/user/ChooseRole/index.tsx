@@ -4,13 +4,13 @@ import { role } from '@/shared/libs/role';
 import { useNavigate } from 'react-router-dom';
 import { useAtom } from 'jotai/index';
 import { userType } from '@/shared/store/atom';
-import { UserType } from '@/shared/types/userType';
+import { RoleType } from '@/shared/types/roleType';
 
 export default function ChooseRole() {
   const navigate = useNavigate();
   const [, setCurrentUserType] = useAtom(userType);
 
-  const handleRoleClick = (currentRole: UserType) => {
+  const handleRoleClick = (currentRole: RoleType) => {
     setCurrentUserType(currentRole);
     navigate('/nickname');
   };
