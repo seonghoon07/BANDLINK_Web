@@ -1,5 +1,5 @@
-import Content from '@/features/user/SignupInfo/Content';
+import SignupInfo from '@/features/user/SignupInfo';
 
 export default function SignupInfoPage() {
-  return <Content />;
+  return <SignupInfo />;
 }

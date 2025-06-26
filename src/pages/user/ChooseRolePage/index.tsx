@@ -1,5 +1,5 @@
-import Content from '@/features/user/ChooseRole/Content';
+import ChooseRole from '@/features/user/ChooseRole';
 
-export default function ChooseRole() {
-  return <Content />;
+export default function ChooseRolePage() {
+  return <ChooseRole />;
 }

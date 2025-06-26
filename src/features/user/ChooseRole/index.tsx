@@ -1,13 +1,18 @@
 import * as S from './style.css';
 import UserRole from '@/components/UserRole';
 import { role } from '@/shared/libs/role';
-import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useAtom } from 'jotai/index';
+import { userType } from '@/shared/store/atom';
+import { RoleType } from '@/shared/types/roleType';
 
-export default function Content() {
-  const [selectedRole, setSelectedRole] = useState<string | null>(null);
+export default function ChooseRole() {
+  const navigate = useNavigate();
+  const [, setCurrentUserType] = useAtom(userType);
 
-  const handleRoleClick = (currentRole: string) => {
-    setSelectedRole(currentRole);
+  const handleRoleClick = (currentRole: RoleType) => {
+    setCurrentUserType(currentRole);
+    navigate('/nickname');
   };
 
   return (
@@ -26,8 +31,7 @@ export default function Content() {
               role={item.role}
               roleInfo={item.roleInfo}
               Icon={item.Icon}
-              selected={selectedRole === item.role}
-              onClick={() => handleRoleClick(item.role)}
+              onClick={() => handleRoleClick(item.type)}
             />
           ))}
           <p className={S.changeableText}>
