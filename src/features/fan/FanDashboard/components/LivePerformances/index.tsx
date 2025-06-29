@@ -1,6 +1,7 @@
 import * as S from './style.css';
 import LivePerformanceCard from '@/components/DashboardCard';
 import { usePerformances } from '@/features/fan/services/fan.query';
+import { PerformanceType } from '@/shared/types/performanceType';
 
 export default function LivePerformances() {
   const { data: performances } = usePerformances();
@@ -8,7 +9,7 @@ export default function LivePerformances() {
     <div className={S.livePerformanceContainer}>
       <p className={S.titleText}>실시간 인기 공연</p>
       <div className={S.livePerformanceCardWrapper}>
-        {performances?.map((i: any) => {
+        {performances?.map((i: PerformanceType) => {
           return (
             <LivePerformanceCard
               key={i.id}

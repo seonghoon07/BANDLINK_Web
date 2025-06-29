@@ -5,6 +5,7 @@ import theme from '@/shared/styles/theme.css';
 
 export const livePerformanceContainer = style({
   width: '100%',
+  minHeight: '176px',
   ...flex.COLUMN_FLEX,
   gap: '12px',
 });

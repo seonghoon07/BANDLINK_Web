@@ -4,12 +4,6 @@ import { BusanRockFestaImg } from '@/assets';
 import { font } from '@/shared/styles/font.css';
 import theme from '@/shared/styles/theme.css';
 
-export const contentLayout = style({
-  ...flex.COLUMN_FLEX,
-  width: '100%',
-  height: '100%',
-});
-
 export const notificationLayout = style({
   position: 'relative',
   ...flex.COLUMN_FLEX,
