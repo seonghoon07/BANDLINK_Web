@@ -35,7 +35,7 @@ export default function UpcomingPerformances() {
             key={performance.id}
             type="upcoming"
             image={performance.posterUrl}
-            artist={performance.title}
+            title={performance.title}
             stateText={`${getDaysUntil(performance.startTime)}`}
           />
         ))}

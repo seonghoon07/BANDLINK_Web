@@ -3,14 +3,14 @@ import * as S from './style.css';
 interface PerformanceCardProps {
   type: 'place' | 'live' | 'upcoming';
   image: string;
-  artist: string;
+  title: string;
   stateText: string;
 }
 
 export default function PerformanceCard({
   type,
   image,
-  artist,
+  title,
   stateText,
 }: PerformanceCardProps) {
   const renderStateText = () => {
@@ -29,7 +29,7 @@ export default function PerformanceCard({
     <div className={S.livePerformanceCard}>
       <img className={S.performanceImg} src={image} alt="공연 이미지" />
       <div className={S.textWrapper}>
-        <p className={S.artistName}>{artist}</p>
+        <p className={S.artistName}>{title}</p>
         {renderStateText()}
       </div>
     </div>

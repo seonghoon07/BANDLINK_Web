@@ -15,7 +15,7 @@ export default function LivePerformances() {
               key={i.id}
               type={'live'}
               image={i.posterUrl}
-              artist={i.title}
+              title={i.title}
               stateText={'800'}
             />
           );
