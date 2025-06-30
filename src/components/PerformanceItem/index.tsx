@@ -17,7 +17,9 @@ export default function PerformanceItem({
 }: PerformanceItemProps) {
   return (
     <div className={S.performanceItemContainer} onClick={onClick}>
-      <img className={S.performanceImg} src={image} />
+      <div className={S.performanceImgWrapper}>
+        <img className={S.performanceImg} alt="앨범 사진" src={image} />
+      </div>
       <div className={S.textWrapper}>
         <p className={S.title}>{title}</p>
         <p className={S.artist}>{artist}</p>
