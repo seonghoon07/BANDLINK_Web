@@ -22,7 +22,7 @@ export default function PerformanceItem({
         <p className={S.title}>{title}</p>
         <p className={S.artist}>{artist}</p>
       </div>
-      <p className={S.price}>{price}원</p>
+      <p className={S.price}>{price.toLocaleString()}원</p>
     </div>
   );
 }
