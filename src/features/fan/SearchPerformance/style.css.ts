@@ -3,6 +3,16 @@ import { flex } from '@/shared/styles/flex.css';
 import theme from '@/shared/styles/theme.css';
 import { font } from '@/shared/styles/font.css';
 
+export const container = style({
+  width: '100vw',
+  height: '100vh',
+  ...flex.COLUMN_FLEX,
+  backgroundColor: theme.gray['900'],
+  padding: '0px 24px',
+  gap: '28px',
+  overflow: 'hidden',
+});
+
 export const contentContainer = style({
   height: '100%',
   ...flex.COLUMN_FLEX,

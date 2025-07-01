@@ -8,11 +8,19 @@ export const performanceItemContainer = style({
   gap: '16px',
 });
 
-export const performanceImg = style({
+export const performanceImgWrapper = style({
   width: '72px',
   height: '72px',
+  flexShrink: 0,
+  position: 'relative',
+});
+
+export const performanceImg = style({
+  width: '100%',
+  height: '100%',
   borderRadius: '8px',
   objectFit: 'cover',
+  display: 'block',
 });
 
 export const textWrapper = style({

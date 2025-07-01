@@ -39,7 +39,10 @@ export default function Router() {
       <Route path="/bandname" element={<SignupInfoPage />} />
       <Route path="/fan/dashboard" element={<FanDashboardPage />} />
       <Route path="/fan/performances" element={<SearchPerformancePage />} />
-      <Route path="/fan/performances/1" element={<PerformanceDetailPage />} />
+      <Route
+        path="/fan/performances/:performanceId"
+        element={<PerformanceDetailPage />}
+      />
       <Route path="/fan/tickets" element={<TicketHistoryPage />} />
       <Route path="/profile" element={<ProfilePage />} />
       <Route path="/band/dashboard" element={<BandDashboardPage />} />

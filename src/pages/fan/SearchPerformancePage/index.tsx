@@ -1,12 +1,5 @@
-import * as S from './style.css';
-import NavigationBar from '@/components/layout/NavigationBar';
-import Content from '@/features/fan/SearchPerformance/Content';
+import SearchPerformance from '@/features/fan/SearchPerformance';
 
-export default function SearchPerformance() {
-  return (
-    <div className={S.container}>
-      <Content />
-      <NavigationBar />
-    </div>
-  );
+export default function SearchPerformancePage() {
+  return <SearchPerformance />;
 }
