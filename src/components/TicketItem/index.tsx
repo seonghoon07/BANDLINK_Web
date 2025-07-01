@@ -32,7 +32,7 @@ export default function TicketItem({
         </div>
         <div className={S.infoItem}>
           <p className={S.infoLable}>가격</p>
-          <p className={S.infoText}>{price}</p>
+          <p className={S.infoText}>{price}원</p>
         </div>
         <div className={S.infoItem}>
           <p className={S.infoLable}>상태</p>

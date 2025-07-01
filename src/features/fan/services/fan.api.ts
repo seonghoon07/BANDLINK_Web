@@ -11,9 +11,13 @@ export const getPerformanceDetail = async (performanceId: number) => {
 };
 
 export const postPerformanceReserve = async (performanceId: number) => {
-  const { data } = await customAxios.post(
-    '/performances/reserve',
-    performanceId
-  );
+  const { data } = await customAxios.post('/performances/reserve', {
+    performanceId,
+  });
+  return data;
+};
+
+export const getReserveHistory = async () => {
+  const { data } = await customAxios.get('/performanceReservation');
   return data;
 };
