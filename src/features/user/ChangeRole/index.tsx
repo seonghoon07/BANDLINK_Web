@@ -6,14 +6,22 @@ import { useAtom } from 'jotai/index';
 import { userType } from '@/shared/store/atom';
 import { RoleType } from '@/shared/types/roleType';
 import { ArrowIcon } from '@/assets';
+import { useUpdateUserRoleMutation } from '@/features/user/services/user.mutation';
 
 export default function ChangeRole() {
   const navigate = useNavigate();
   const [, setCurrentUserType] = useAtom(userType);
+  const { mutate: updateRoleMutate } = useUpdateUserRoleMutation();
 
   const handleRoleClick = (currentRole: RoleType) => {
     setCurrentUserType(currentRole);
-    navigate('/nickname');
+    const updateRoleBody = { role: currentRole };
+    updateRoleMutate(updateRoleBody, {
+      onSuccess: () =>
+        currentRole === 'FAN'
+          ? navigate('/fan/dashboard')
+          : navigate('/spaceOwner/dashboard'),
+    });
   };
 
   return (
