@@ -1,9 +1,9 @@
 export interface Ticket {
-  id: string;
-  performanceName: string;
-  date: string;
-  address: string;
-  price: number;
+  id?: string;
+  title: string;
+  reservedAt: string;
+  place: string;
+  price: string;
   status: '예매완료' | '취소됨';
-  imageUrl: string;
+  posterUrl: string;
 }
