@@ -5,3 +5,8 @@ export const postRegister = async (userData: UserData) => {
   const { data } = await customAxios.post('/auth/register', userData);
   return data;
 };
+
+export const getUser = async () => {
+  const { data } = await customAxios.get('/users');
+  return data;
+};
