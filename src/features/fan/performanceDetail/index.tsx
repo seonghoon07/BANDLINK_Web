@@ -5,12 +5,24 @@ import Button from '@/components/common/Button';
 import NavigationBar from '@/components/layout/NavigationBar';
 import { usePerformanceDetail } from '@/features/fan/services/fan.query';
 import { formatPerformanceDate } from '@/shared/libs/formatDate';
+import { usePerformanceReserveMutation } from '@/features/fan/services/fan.mutation';
 
 export default function PerformanceDetail() {
   const navigate = useNavigate();
   const { performanceId } = useParams<{ performanceId: string }>();
   const numberPerformanceId = Number(performanceId);
   const { data: performanceDetail } = usePerformanceDetail(numberPerformanceId);
+  const { mutate: performanceReserveMutate } = usePerformanceReserveMutation();
+
+  const handleReserveBtnClick = () => {
+    const isReserve = confirm('정말 예약하시겠습니까?');
+    if (isReserve) {
+      performanceReserveMutate(numberPerformanceId, {
+        onSuccess: () => alert('예약되었습니다.'),
+        onError: () => alert('예약에 실패하였습니다.'),
+      });
+    }
+  };
 
   return (
     <div className={S.container}>
@@ -59,7 +71,12 @@ export default function PerformanceDetail() {
           </div>
         </div>
         <div className={S.reserveBtnContainer}>
-          <Button type="button" color="primary" size="lg">
+          <Button
+            type="button"
+            color="primary"
+            size="lg"
+            onClick={handleReserveBtnClick}
+          >
             예매하기
           </Button>
         </div>
