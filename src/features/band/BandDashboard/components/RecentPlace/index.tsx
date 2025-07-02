@@ -2,16 +2,21 @@ import * as S from './style.css';
 import PerformanceCard from '@/components/DashboardCard';
 
 export default function RecentPlace() {
+  const recentPlaces = JSON.parse(
+    localStorage.getItem('recent_places') || '[]'
+  );
   return (
     <div className={S.upcomingPerformanceContainer}>
       <p className={S.titleText}>최근 본 장소</p>
       <div className={S.upcomingPerformanceCardWrapper}>
-        <PerformanceCard
-          type="place"
-          image="https://picsum.photos/200"
-          artist="음악공연장 롤링홀ㅇㄹㅁㅁㄹ"
-          stateText="부산 강서구 봉림동"
-        />
+        {recentPlaces.map((place: any) => (
+          <PerformanceCard
+            type="place"
+            image={place.imageUrl}
+            title={place.name}
+            stateText={place.address}
+          />
+        ))}
       </div>
     </div>
   );

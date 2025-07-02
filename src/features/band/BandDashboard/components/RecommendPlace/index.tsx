@@ -1,35 +1,26 @@
 import * as S from './style.css';
 import LivePerformanceCard from '@/components/DashboardCard';
+import { usePlaces } from '@/features/band/services/band.query';
 
 export default function RecommendPlace() {
+  const { data: places } = usePlaces();
   return (
     <div className={S.livePerformanceContainer}>
       <p className={S.titleText}>추천 대관 장소</p>
       <div className={S.livePerformanceCardWrapper}>
-        <LivePerformanceCard
-          type="place"
-          image="https://picsum.photos/200"
-          artist="음악공연장 롤링홀ㅇㄹㅁㅁㄹ"
-          stateText="부산 강서구 봉림동"
-        />
-        <LivePerformanceCard
-          type="place"
-          image="https://picsum.photos/200"
-          artist="음악공연장 롤링홀ㅇㄹㅁㅁㄹ"
-          stateText="부산 강서구 봉림동"
-        />
-        <LivePerformanceCard
-          type="place"
-          image="https://picsum.photos/200"
-          artist="음악공연장 롤링홀ㅇㄹㅁㅁㄹ"
-          stateText="부산 강서구 봉림동"
-        />
-        <LivePerformanceCard
-          type="place"
-          image="https://picsum.photos/200"
-          artist="음악공연장 롤링홀ㅇㄹㅁㅁㄹ"
-          stateText="부산 강서구 봉림동"
-        />
+        {places?.map((place: any) => {
+          if (place.isRecommended) {
+            return (
+              <LivePerformanceCard
+                key={place.id}
+                type="place"
+                image={place.imageUrl}
+                title={place.name}
+                stateText={place.address}
+              />
+            );
+          }
+        })}
       </div>
     </div>
   );
