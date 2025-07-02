@@ -16,7 +16,7 @@ const settingSections: SettingSection[] = [
   {
     title: '계정',
     items: [
-      { label: '유저 전환', href: '/role' },
+      { label: '유저 전환', href: '/role/change' },
       { label: '로그아웃', danger: true },
     ],
   },
@@ -46,7 +46,11 @@ export default function SettingMenuSection() {
             <p className={S.menuSectionTitle}>{section.title}</p>
           </div>
           {section.items.map((item) => (
-            <div className={S.menuItemContainer} key={item.label} onClick={() => handleMenuClick(item.href)}>
+            <div
+              className={S.menuItemContainer}
+              key={item.label}
+              onClick={() => handleMenuClick(item.href)}
+            >
               <p className={S.menuItem}>
                 <span className={item.danger ? S.warningText : ''}>
                   {item.label}

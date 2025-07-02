@@ -4,6 +4,8 @@ import {
   ProfilePage,
   SignupInfoPage,
   ChooseRolePage,
+  ChangeRolePage,
+  BandRegistrationPage,
 } from '@/pages/user';
 import {
   FanDashboardPage,
@@ -35,8 +37,10 @@ export default function Router() {
     <Routes>
       <Route path="/" element={<StartPage />} />
       <Route path="/role" element={<ChooseRolePage />} />
+      <Route path="/role/change" element={<ChangeRolePage />} />
       <Route path="/nickname" element={<SignupInfoPage />} />
       <Route path="/bandname" element={<SignupInfoPage />} />
+      <Route path="/register/band/name" element={<BandRegistrationPage />} />
       <Route path="/fan/dashboard" element={<FanDashboardPage />} />
       <Route path="/fan/performances" element={<SearchPerformancePage />} />
       <Route
