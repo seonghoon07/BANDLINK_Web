@@ -9,7 +9,7 @@ export default function RecentPlace() {
         <PerformanceCard
           type="place"
           image="https://picsum.photos/200"
-          artist="음악공연장 롤링홀ㅇㄹㅁㅁㄹ"
+          title="음악공연장 롤링홀ㅇㄹㅁㅁㄹ"
           stateText="부산 강서구 봉림동"
         />
       </div>
