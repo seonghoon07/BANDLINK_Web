@@ -7,21 +7,31 @@ import { userType } from '@/shared/store/atom';
 import { RoleType } from '@/shared/types/roleType';
 import { ArrowIcon } from '@/assets';
 import { useUpdateUserRoleMutation } from '@/features/user/services/user.mutation';
+import { useUser } from '@/features/user/services/user.query';
 
 export default function ChangeRole() {
   const navigate = useNavigate();
   const [, setCurrentUserType] = useAtom(userType);
   const { mutate: updateRoleMutate } = useUpdateUserRoleMutation();
+  const { data: user } = useUser();
 
   const handleRoleClick = (currentRole: RoleType) => {
     setCurrentUserType(currentRole);
-    const updateRoleBody = { role: currentRole };
-    updateRoleMutate(updateRoleBody, {
-      onSuccess: () =>
-        currentRole === 'FAN'
-          ? navigate('/fan/dashboard')
-          : navigate('/spaceOwner/dashboard'),
-    });
+    if (currentRole === 'BAND') {
+      if (user.roles.includes('BAND')) {
+        navigate('/band/dashboard');
+      } else {
+        navigate('/register/band/name');
+      }
+    } else {
+      const updateRoleBody = { role: currentRole };
+      updateRoleMutate(updateRoleBody, {
+        onSuccess: () =>
+          currentRole === 'FAN'
+            ? navigate('/fan/dashboard')
+            : navigate('/spaceOwner/dashboard'),
+      });
+    }
   };
 
   return (
