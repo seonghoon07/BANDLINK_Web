@@ -4,9 +4,20 @@ import theme from '@/shared/styles/theme.css';
 import { SearchIcon, FilterIcon } from '@/assets';
 import PlaceItem from '@/components/PlaceItem';
 import { useNavigate } from 'react-router-dom';
+import { usePlaces } from '@/features/band/services/band.query';
+import { PlaceType } from '@/shared/types/placeType';
 
 export default function SearchPlace() {
   const navigate = useNavigate();
+  const { data: places } = usePlaces();
+
+  const sortPlaceType = (types: string[]) => {
+    return types
+      .slice()
+      .sort((a, b) => (a === '합주실' ? -1 : b === '합주실' ? 1 : 0))
+      .join(', ');
+  };
+
   return (
     <div className={S.container}>
       <div className={S.headerContainer}>
@@ -32,25 +43,15 @@ export default function SearchPlace() {
         </div>
       </div>
       <div className={S.placesContainer}>
-        <PlaceItem
-          imageUrl={'https://picsum.photos/200'}
-          placename={'디어뮤직 스튜디오 24시간 무인 음악연습실&합주실'}
-          address={'부산 남구 문현동'}
-          type={'합주실'}
-          onClick={() => navigate('/band/place/1')}
-        />
-        <PlaceItem
-          imageUrl={'https://picsum.photos/200'}
-          placename={'디어뮤직 스튜디오 24시간 무인 음악연습실&합주실'}
-          address={'부산 남구 문현동'}
-          type={'합주실'}
-        />
-        <PlaceItem
-          imageUrl={'https://picsum.photos/200'}
-          placename={'디어뮤직 스튜디오 24시간 무인 음악연습실&합주실'}
-          address={'부산 남구 문현동'}
-          type={'합주실'}
-        />
+        {places?.map((place: PlaceType) => (
+          <PlaceItem
+            imageUrl={place.imageUrl}
+            placename={place.name}
+            address={place.address}
+            type={sortPlaceType(place.type)}
+            onClick={() => navigate(`/band/place/${place.id}`)}
+          />
+        ))}
       </div>
       <NavigationBar />
     </div>
