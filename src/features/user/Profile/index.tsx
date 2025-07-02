@@ -13,7 +13,12 @@ export default function Profile() {
   return (
     <div className={S.container}>
       <div className={S.profileContainer}>
-        <ProfileHeader username={user?.nickname} email={user?.email} />
+        <ProfileHeader
+          username={
+            currentUserRole === 'BAND' ? user?.bandname : user?.nickname
+          }
+          email={user?.email}
+        />
         <InfoSummaryCard type={currentUserRole} point={12400} coupon={0} />
         <SettingMenuSection />
       </div>
