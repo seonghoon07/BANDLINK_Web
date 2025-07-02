@@ -12,6 +12,7 @@ export default function RecommendPlace() {
           if (place.isRecommended) {
             return (
               <LivePerformanceCard
+                key={place.id}
                 type="place"
                 image={place.imageUrl}
                 title={place.name}
