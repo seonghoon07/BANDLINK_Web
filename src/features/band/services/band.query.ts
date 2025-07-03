@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { bandKeys } from '@/features/band/services/band.key';
-import { getPlaceDetails, getPlaces } from '@/features/band/services/band.api';
+import { getPlaceDetails, getPlaces, getRoomDetails } from '@/features/band/services/band.api';
 
 export const usePlaces = () => {
   return useQuery({
@@ -13,5 +13,12 @@ export const usePlaceDetails = (placeId: string) => {
   return useQuery({
     queryKey: [bandKeys.placeDetail, placeId],
     queryFn: () => getPlaceDetails(placeId),
+  });
+};
+
+export const useRoomDetails = (roomId: string) => {
+  return useQuery({
+    queryKey: [bandKeys.roomDetail, roomId],
+    queryFn: () => getRoomDetails(roomId),
   });
 };

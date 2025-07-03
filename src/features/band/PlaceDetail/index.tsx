@@ -34,7 +34,11 @@ export default function PlaceDetail() {
                   price={room.price}
                   description={room.description}
                   imgUrl={room.imageUrl}
-                  onClick={() => navigate('/band/place/1/room/1/reserve')}
+                  onClick={() =>
+                    navigate(
+                      `/band/place/${placeDetails.id}/room/${room.id}/reserve`
+                    )
+                  }
                 />
               ))}
             </div>
