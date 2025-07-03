@@ -9,4 +9,5 @@ export type PlaceType = {
   businessDays: string[];
   openTime: string;
   closeTime: string;
+  rooms: { id: number; price: number }[];
 };

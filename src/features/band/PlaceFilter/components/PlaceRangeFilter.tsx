@@ -4,7 +4,7 @@ import theme from '@/shared/styles/theme.css';
 
 interface PriceRangeFilterProps {
   priceRange: number[];
-  setPriceRange: (vals: number[]) => void;
+  setPriceRange: (vals: [number, number]) => void;
 }
 
 export function PriceRangeFilter({
@@ -19,7 +19,7 @@ export function PriceRangeFilter({
       </p>
       <Range
         values={priceRange}
-        onChange={setPriceRange}
+        onChange={(vals) => setPriceRange([vals[0], vals[1]])}
         min={0}
         max={250000}
         step={5000}

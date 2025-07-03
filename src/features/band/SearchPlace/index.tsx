@@ -8,10 +8,13 @@ import { usePlaces } from '@/features/band/services/band.query';
 import { PlaceType } from '@/shared/types/placeType';
 import { useState } from 'react';
 import Hangul from 'hangul-js';
+import { useAtom } from 'jotai/index';
+import { placeFilterAtom } from '@/shared/store/placeFilterAtom';
 
 export default function SearchPlace() {
   const navigate = useNavigate();
   const [searchPlaceKeyword, setSearchPlaceKeyword] = useState('');
+  const [placeFilter] = useAtom(placeFilterAtom);
   const { data: places } = usePlaces();
 
   const sortPlaceType = (types: string[]) => {
@@ -23,13 +26,33 @@ export default function SearchPlace() {
 
   const filteredPlaces = places?.filter((place: PlaceType) => {
     const keywordLower = searchPlaceKeyword.toLowerCase();
-
     const name = place.name ?? '';
 
-    return (
+    const matchesKeyword =
       name.toLowerCase().includes(keywordLower) ||
-      Hangul.search(name, searchPlaceKeyword) > -1
+      Hangul.search(name, searchPlaceKeyword) > -1;
+
+    const selectedTypes = placeFilter.types;
+    const placeTypes = place.type;
+
+    const matchesType =
+      selectedTypes.length === 0
+        ? true
+        : selectedTypes.length === 1
+          ? placeTypes.includes(selectedTypes[0])
+          : selectedTypes.every((t) => placeTypes.includes(t));
+
+    const matchesArea =
+      placeFilter.areas.length === 0 ||
+      placeFilter.areas.some((area) => place.address.includes(area));
+
+    const matchesPrice = place.rooms?.some(
+      (room) =>
+        room.price >= placeFilter.priceRange[0] &&
+        room.price <= placeFilter.priceRange[1]
     );
+
+    return matchesKeyword && matchesType && matchesArea && matchesPrice;
   });
 
   return (
@@ -66,6 +89,30 @@ export default function SearchPlace() {
           onClick={() => navigate('/band/place/filter')}
         >
           <FilterIcon />
+        </div>
+        <div className={S.selectedFilterWrapper}>
+          {placeFilter.types.length > 0 && (
+            <div className={S.selectFilterContainer}>
+              <p className={S.selectFilterText}>
+                {placeFilter.types.join(', ')}
+              </p>
+            </div>
+          )}
+          {(placeFilter.priceRange[0] !== 0 ||
+            placeFilter.priceRange[1] !== 250000) && (
+            <div className={S.selectFilterContainer}>
+              <p
+                className={S.selectFilterText}
+              >{`${placeFilter.priceRange[0].toLocaleString()}원 ~ ${placeFilter.priceRange[1].toLocaleString()}원`}</p>
+            </div>
+          )}
+          {placeFilter.areas.length > 0 && (
+            <div className={S.selectFilterContainer}>
+              <p className={S.selectFilterText}>
+                {`${placeFilter.areas.length}개의 지역`}
+              </p>
+            </div>
+          )}
         </div>
       </div>
       <div className={S.placesContainer}>

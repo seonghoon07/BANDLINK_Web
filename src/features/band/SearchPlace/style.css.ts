@@ -64,3 +64,26 @@ export const placesContainer = style({
   width: '100%',
   height: '100%',
 });
+
+export const selectedFilterWrapper = style({
+  width: '100%',
+  ...flex.FLEX,
+  gap: '8px',
+  overflowX: 'auto',
+  whiteSpace: 'nowrap',
+  '::-webkit-scrollbar': {
+    display: 'none',
+  },
+});
+
+export const selectFilterContainer = style({
+  ...flex.CENTER,
+  padding: '8px 12px',
+  borderRadius: '8px',
+  border: `1px solid ${theme.yellow['500']}`,
+});
+
+export const selectFilterText = style({
+  ...font.p3,
+  color: theme.yellow['500'],
+});
