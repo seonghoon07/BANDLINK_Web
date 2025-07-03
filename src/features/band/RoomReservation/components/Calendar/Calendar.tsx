@@ -2,18 +2,22 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import './style.css';
 import FullCalendar from '@fullcalendar/react';
 import { usePastDateClass } from '@/shared/hooks/usePastDateClass';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import interactionPlugin, { DateClickArg } from '@fullcalendar/interaction';
-import type { DayCellContentArg } from '@fullcalendar/core';
 import theme from '@/shared/styles/theme.css';
+import { DayCellContentArg } from '@fullcalendar/core';
 
-export default function Calendar() {
-  const today = new Date().toISOString().split('T')[0];
-  const calendarRef = useRef<any>(null);
+type CalendarProps = {
+  selectedDate: string;
+  setSelectedDate: (selectedDate: string) => void;
+};
+
+export default function Calendar({
+  selectedDate,
+  setSelectedDate,
+}: CalendarProps) {
+  const calendarRef = useRef(null);
   const lastSelectedEl = useRef<HTMLElement | null>(null);
-  const [selectedDate, setSelectedDate] = useState<string | null>(today);
-
-  console.log(selectedDate);
 
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -37,7 +41,7 @@ export default function Calendar() {
     }, 0);
 
     return () => clearTimeout(timeout);
-  }, []);
+  }, [selectedDate]);
 
   usePastDateClass();
 
