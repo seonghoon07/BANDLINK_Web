@@ -1,25 +1,17 @@
 import * as S from '../style.css';
-import { useState } from 'react';
 
-export default function TimeSlot() {
+type TimeSlotProps = {
+  selectedRange: [number, number] | null;
+  setSelectedRange: React.Dispatch<
+    React.SetStateAction<[number, number] | null>
+  >;
+};
+
+export default function TimeSlot({
+  selectedRange,
+  setSelectedRange,
+}: TimeSlotProps) {
   const hours = Array.from({ length: 24 }, (_, i) => i);
-  const [selectedRange, setSelectedRange] = useState<[number, number] | null>(
-    null
-  );
-
-  const getSelectedTimeRange = (range: [number, number] | null) => {
-    if (!range) return null;
-
-    const [start, end] = range;
-    const pad = (n: number) => String(n).padStart(2, '0');
-
-    return {
-      startTime: `${pad(start)}:00:00`,
-      endTime: `${pad(end)}:59:59`,
-    };
-  };
-
-  console.log(getSelectedTimeRange(selectedRange));
 
   const handleHourClick = (hour: number) => {
     if (!selectedRange) {
