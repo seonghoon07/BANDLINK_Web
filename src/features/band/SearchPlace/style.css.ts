@@ -43,7 +43,6 @@ export const searchIcon = style({
   top: '50%',
   right: '16px',
   transform: 'translateY(-50%)',
-  pointerEvents: 'none',
 });
 
 export const filterContainer = style({
