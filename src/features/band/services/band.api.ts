@@ -24,3 +24,8 @@ export const postRoomReserve = async ({ roomId, body }: RoomReserveParams) => {
   const { data } = await customAxios.post(`/rooms/${roomId}/reserve`, body);
   return data;
 };
+
+export const getMyPerformances = async () => {
+  const { data } = await customAxios.get('/performances/my');
+  return data;
+};
