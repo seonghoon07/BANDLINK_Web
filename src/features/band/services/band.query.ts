@@ -4,7 +4,7 @@ import {
   getMyPerformances,
   getPlaceDetails,
   getPlaces,
-  getRoomDetails,
+  getRoomDetails, getRoomReservation,
 } from '@/features/band/services/band.api';
 
 export const usePlaces = () => {
@@ -32,5 +32,12 @@ export const useMyPerformances = () => {
   return useQuery({
     queryKey: [bandKeys.myPerformances],
     queryFn: getMyPerformances,
+  });
+};
+
+export const useRoomReservation = () => {
+  return useQuery({
+    queryKey: [bandKeys.roomReservation],
+    queryFn: getRoomReservation,
   });
 };

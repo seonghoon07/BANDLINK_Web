@@ -20,6 +20,11 @@ export const getRoomDetails = async (roomId: string) => {
   return data;
 };
 
+export const getRoomReservation = async () => {
+  const { data } = await customAxios.get('/roomReservation');
+  return data;
+}
+
 export const postRoomReserve = async ({ roomId, body }: RoomReserveParams) => {
   const { data } = await customAxios.post(`/rooms/${roomId}/reserve`, body);
   return data;
@@ -27,5 +32,18 @@ export const postRoomReserve = async ({ roomId, body }: RoomReserveParams) => {
 
 export const getMyPerformances = async () => {
   const { data } = await customAxios.get('/performances/my');
+  return data;
+};
+
+export const postCreatePerformance = async (createPerforamnceBody: any) => {
+  const { data } = await customAxios.post(
+    '/performances',
+    createPerforamnceBody,
+    {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    }
+  );
   return data;
 };
