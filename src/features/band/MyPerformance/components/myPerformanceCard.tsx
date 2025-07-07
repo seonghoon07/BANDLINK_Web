@@ -5,7 +5,7 @@ interface MyPerformanceCardProps {
   name: string;
   startTime: string;
   location: string;
-  price: string;
+  price: number;
 }
 
 export default function MyPerformanceCard({
@@ -37,7 +37,7 @@ export default function MyPerformanceCard({
         </div>
         <div className={S.categoryContainer}>
           <p className={S.categoryLabel}>가격</p>
-          <p className={S.categoryValue}>{price}</p>
+          <p className={S.categoryValue}>{price.toLocaleString()}원</p>
         </div>
         <div className={S.categoryContainer}>
           <p className={S.categoryLabel}>장소 상태</p>
