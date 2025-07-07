@@ -2,18 +2,22 @@ import * as S from './style.css';
 import theme from '@/shared/styles/theme.css';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { navItems } from '@/shared/libs/navItems';
-
-const getRoleFromPath = (pathname: string): keyof typeof navItems => {
-  if (pathname.startsWith('/band')) return 'band';
-  if (pathname.startsWith('/spaceOwner')) return 'spaceOwner';
-  return 'fan';
-};
+import { useAtomValue } from 'jotai';
+import { userType } from '@/shared/store/atom'; // 경로는 맞게 조정해줘
 
 export default function NavigationBar() {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const role = getRoleFromPath(location.pathname);
+  const currentRole = useAtomValue(userType);
+
+  const role =
+    currentRole === 'FAN'
+      ? 'fan'
+      : currentRole === 'BAND'
+        ? 'band'
+        : 'spaceOwner';
+
   const items = navItems[role];
 
   return (

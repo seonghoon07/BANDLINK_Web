@@ -10,6 +10,7 @@ import { userType } from '@/shared/store/atom';
 export default function Profile() {
   const [currentUserRole] = useAtom(userType);
   const { data: user } = useUser();
+
   return (
     <div className={S.container}>
       <div className={S.profileContainer}>
