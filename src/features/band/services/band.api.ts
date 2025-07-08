@@ -54,3 +54,10 @@ export const getUnavailableDates = async (reserveInfo: any) => {
   );
   return data;
 };
+
+export const getUnavailableHours = async (timeReserveInfo: any) => {
+  const { data } = await customAxios.get(
+    `/rooms/${timeReserveInfo.roomId}/unavailableHours?date=${timeReserveInfo.date}`
+  );
+  return data;
+};

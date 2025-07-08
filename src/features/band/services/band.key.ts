@@ -6,4 +6,5 @@ export const bandKeys = {
   myPerformances: 'band.query.myPerformances',
   createPerformance: 'band.query.createPerformance',
   unavailableDates: 'band.query.unavailableDates',
+  unavailableHours: 'band.query.unavailableHours',
 };

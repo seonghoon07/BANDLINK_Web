@@ -8,6 +8,7 @@ import Button from '@/components/common/Button';
 import {
   useRoomDetails,
   useUnavailableDates,
+  useUnavailableHours,
 } from '@/features/band/services/band.query';
 import { useState } from 'react';
 import { useRoomReserveMutation } from '@/features/band/services/band.mutation';
@@ -25,9 +26,14 @@ export default function RoomReservation() {
     year: today.split('-')[0],
     month: today.split('-')[1],
   });
+  const timeReserveInfo = {
+    roomId: Number(roomId),
+    date: selectedDate,
+  };
   const { data: roomDetails } = useRoomDetails(roomId!);
   const { mutate: roomReserveMutate } = useRoomReserveMutation();
   const { data: unavailableDates = [] } = useUnavailableDates(dateInfo);
+  const { data: unavailableHours = [] } = useUnavailableHours(timeReserveInfo);
 
   const buildRoomReserveBody = (
     date: string,

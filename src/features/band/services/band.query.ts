@@ -6,7 +6,7 @@ import {
   getPlaces,
   getRoomDetails,
   getRoomReservation,
-  getUnavailableDates,
+  getUnavailableDates, getUnavailableHours,
 } from '@/features/band/services/band.api';
 
 export const usePlaces = () => {
@@ -58,5 +58,20 @@ export const useUnavailableDates = (reserveInfo: {
     ],
     queryFn: () => getUnavailableDates(reserveInfo),
     enabled: !!reserveInfo.roomId,
+  });
+};
+
+export const useUnavailableHours = (timeReserveInfo: {
+  roomId: number | undefined;
+  date: string;
+}) => {
+  return useQuery({
+    queryKey: [
+      bandKeys.unavailableHours,
+      timeReserveInfo.roomId,
+      timeReserveInfo.date,
+    ],
+    queryFn: () => getUnavailableHours(timeReserveInfo),
+    enabled: !!timeReserveInfo.roomId,
   });
 };
