@@ -176,3 +176,7 @@ export const subDescription = style({
   ...font.p2,
   color: theme.gray['200'],
 });
+
+export const closed = style({
+  backgroundColor: theme.gray['700'],
+});

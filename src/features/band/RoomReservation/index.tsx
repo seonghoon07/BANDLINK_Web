@@ -120,6 +120,7 @@ export default function RoomReservation() {
             <TimeSlot
               selectedRange={selectedRange}
               setSelectedRange={setSelectedRange}
+              unavailableHours={unavailableHours || []}
             />
             <div className={S.deviderLine} />
             <div className={S.subDescriptionContainer}>

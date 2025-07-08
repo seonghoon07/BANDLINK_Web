@@ -30,6 +30,7 @@ export default function PlaceDetail() {
             <div className={S.roomList}>
               {placeDetails.rooms.map((room: RoomType) => (
                 <RoomItem
+                  key={room.id}
                   roomname={room.name}
                   price={room.price}
                   description={room.description}
