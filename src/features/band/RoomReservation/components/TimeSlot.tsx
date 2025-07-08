@@ -5,11 +5,13 @@ type TimeSlotProps = {
   setSelectedRange: React.Dispatch<
     React.SetStateAction<[number, number] | null>
   >;
+  unavailableHours: number[];
 };
 
 export default function TimeSlot({
   selectedRange,
   setSelectedRange,
+  unavailableHours,
 }: TimeSlotProps) {
   const hours = Array.from({ length: 24 }, (_, i) => i);
 
@@ -23,8 +25,18 @@ export default function TimeSlot({
         setSelectedRange([hour, hour]);
       } else {
         const newStart = Math.min(hour, start);
-        const newEnd = Math.max(hour, end);
-        setSelectedRange([newStart, newEnd]);
+        const newEnd = Math.max(hour, start);
+
+        const hasUnavailable = unavailableHours.some(
+          (unavailableHour) =>
+            unavailableHour >= newStart && unavailableHour <= newEnd
+        );
+
+        if (hasUnavailable) {
+          setSelectedRange([hour, hour]);
+        } else {
+          setSelectedRange([newStart, newEnd]);
+        }
       }
     }
   };
@@ -47,17 +59,23 @@ export default function TimeSlot({
                   key={hour}
                   className={[
                     S.timeBlock,
-                    selectedRange &&
-                    hour >= selectedRange[0] &&
-                    hour <= selectedRange[1]
-                      ? S.selected
-                      : S.unselected,
+                    unavailableHours.includes(hour)
+                      ? S.closed
+                      : selectedRange &&
+                          hour >= selectedRange[0] &&
+                          hour <= selectedRange[1]
+                        ? S.selected
+                        : S.unselected,
                     isFirst && S.roundedLeft,
                     isLast && S.roundedRight,
                   ]
                     .filter(Boolean)
                     .join(' ')}
-                  onClick={() => handleHourClick(hour)}
+                  onClick={
+                    unavailableHours.includes(hour)
+                      ? undefined
+                      : () => handleHourClick(hour)
+                  }
                 />
               </div>
             </div>

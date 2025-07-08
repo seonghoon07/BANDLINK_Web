@@ -5,4 +5,6 @@ export const bandKeys = {
   roomReservation: 'band.query.roomReservation',
   myPerformances: 'band.query.myPerformances',
   createPerformance: 'band.query.createPerformance',
+  unavailableDates: 'band.query.unavailableDates',
+  unavailableHours: 'band.query.unavailableHours',
 };

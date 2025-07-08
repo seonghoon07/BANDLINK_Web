@@ -118,6 +118,7 @@ export default function SearchPlace() {
       <div className={S.placesContainer}>
         {filteredPlaces?.map((place: PlaceType) => (
           <PlaceItem
+            key={place.id}
             imageUrl={place.imageUrl}
             placename={place.name}
             address={place.address}
