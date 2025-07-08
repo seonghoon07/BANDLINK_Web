@@ -23,7 +23,7 @@ export const getRoomDetails = async (roomId: string) => {
 export const getRoomReservation = async () => {
   const { data } = await customAxios.get('/roomReservation');
   return data;
-}
+};
 
 export const postRoomReserve = async ({ roomId, body }: RoomReserveParams) => {
   const { data } = await customAxios.post(`/rooms/${roomId}/reserve`, body);
@@ -44,6 +44,13 @@ export const postCreatePerformance = async (createPerforamnceBody: any) => {
         'Content-Type': 'multipart/form-data',
       },
     }
+  );
+  return data;
+};
+
+export const getUnavailableDates = async (reserveInfo: any) => {
+  const { data } = await customAxios.get(
+    `/rooms/${reserveInfo.roomId}/unavailableDates?year=${reserveInfo.year}&month=${reserveInfo.month}`
   );
   return data;
 };

@@ -5,20 +5,29 @@ import { useNavigate, useParams } from 'react-router-dom';
 import Calendar from './components/Calendar/Calendar';
 import TimeSlot from '@/features/band/RoomReservation/components/TimeSlot';
 import Button from '@/components/common/Button';
-import { useRoomDetails } from '@/features/band/services/band.query';
+import {
+  useRoomDetails,
+  useUnavailableDates,
+} from '@/features/band/services/band.query';
 import { useState } from 'react';
 import { useRoomReserveMutation } from '@/features/band/services/band.mutation';
 
 export default function RoomReservation() {
   const today = new Date().toISOString().split('T')[0];
+  const { roomId } = useParams<{ roomId: string }>();
   const navigate = useNavigate();
   const [selectedDate, setSelectedDate] = useState<string>(today);
   const [selectedRange, setSelectedRange] = useState<[number, number] | null>(
     null
   );
-  const { roomId } = useParams<{ roomId: string }>();
+  const [dateInfo, setDateInfo] = useState({
+    roomId: Number(roomId),
+    year: today.split('-')[0],
+    month: today.split('-')[1],
+  });
   const { data: roomDetails } = useRoomDetails(roomId!);
   const { mutate: roomReserveMutate } = useRoomReserveMutation();
+  const { data: unavailableDates = [] } = useUnavailableDates(dateInfo);
 
   const buildRoomReserveBody = (
     date: string,
@@ -97,6 +106,8 @@ export default function RoomReservation() {
               <Calendar
                 selectedDate={selectedDate}
                 setSelectedDate={setSelectedDate}
+                unavailableDates={unavailableDates || []}
+                setDateInfo={setDateInfo}
               />
             </div>
             <div className={S.deviderLine} />

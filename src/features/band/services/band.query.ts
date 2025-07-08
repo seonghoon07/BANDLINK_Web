@@ -4,7 +4,9 @@ import {
   getMyPerformances,
   getPlaceDetails,
   getPlaces,
-  getRoomDetails, getRoomReservation,
+  getRoomDetails,
+  getRoomReservation,
+  getUnavailableDates,
 } from '@/features/band/services/band.api';
 
 export const usePlaces = () => {
@@ -39,5 +41,22 @@ export const useRoomReservation = () => {
   return useQuery({
     queryKey: [bandKeys.roomReservation],
     queryFn: getRoomReservation,
+  });
+};
+
+export const useUnavailableDates = (reserveInfo: {
+  roomId: number | undefined;
+  year: string;
+  month: string;
+}) => {
+  return useQuery({
+    queryKey: [
+      bandKeys.unavailableDates,
+      reserveInfo.roomId,
+      reserveInfo.year,
+      reserveInfo.month,
+    ],
+    queryFn: () => getUnavailableDates(reserveInfo),
+    enabled: !!reserveInfo.roomId,
   });
 };

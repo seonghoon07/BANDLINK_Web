@@ -1,23 +1,34 @@
-import dayGridPlugin from '@fullcalendar/daygrid';
 import './style.css';
 import FullCalendar from '@fullcalendar/react';
-import { usePastDateClass } from '@/shared/hooks/usePastDateClass';
-import { useEffect, useRef } from 'react';
+import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin, { DateClickArg } from '@fullcalendar/interaction';
+import { DayCellContentArg, DayCellMountArg } from '@fullcalendar/core';
+import { useEffect, useRef } from 'react';
+import { usePastDateClass } from '@/shared/hooks/usePastDateClass';
 import theme from '@/shared/styles/theme.css';
-import { DayCellContentArg } from '@fullcalendar/core';
 
 type CalendarProps = {
   selectedDate: string;
-  setSelectedDate: (selectedDate: string) => void;
+  setSelectedDate: React.Dispatch<React.SetStateAction<string>>;
+  unavailableDates: string[];
+  setDateInfo: React.Dispatch<
+    React.SetStateAction<{
+      roomId: number;
+      year: string;
+      month: string;
+    }>
+  >;
 };
 
 export default function Calendar({
   selectedDate,
   setSelectedDate,
+  unavailableDates,
 }: CalendarProps) {
   const calendarRef = useRef(null);
   const lastSelectedEl = useRef<HTMLElement | null>(null);
+
+  usePastDateClass();
 
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -32,18 +43,14 @@ export default function Calendar({
           '.fc-daygrid-day-number span'
         ) as HTMLElement;
 
-        if (numberEl) {
-          numberEl.style.color = theme.gray['900'];
-        }
+        if (numberEl) numberEl.style.color = theme.gray['900'];
 
         lastSelectedEl.current = cell;
       }
     }, 0);
 
     return () => clearTimeout(timeout);
-  }, [selectedDate]);
-
-  usePastDateClass();
+  }, [selectedDate, unavailableDates]);
 
   const dayCellContent = (info: DayCellContentArg) => {
     const dayNumber = info.dayNumberText.replace('일', '');
@@ -52,20 +59,25 @@ export default function Calendar({
 
   const handleDateClick = (info: DateClickArg) => {
     const clickedDate = new Date(info.dateStr);
-    const todayDate = new Date();
-    todayDate.setHours(0, 0, 0, 0);
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
 
-    if (clickedDate < todayDate) return;
+    const clickedDateStr = info.dateStr;
 
-    setSelectedDate(info.dateStr);
+    const isPast = clickedDate < today;
+    const isUnavailable = unavailableDates.includes(clickedDateStr);
+    const isOtherMonth = info.dayEl.classList.contains('fc-day-other');
+
+    if (isPast || isUnavailable || isOtherMonth) return;
+
+    setSelectedDate(clickedDateStr);
+
     if (lastSelectedEl.current) {
       lastSelectedEl.current.style.backgroundColor = '';
-
-      const oldNumberEl = lastSelectedEl.current.querySelector(
+      const prevNumberEl = lastSelectedEl.current.querySelector(
         '.fc-daygrid-day-number span'
       ) as HTMLElement;
-
-      if (oldNumberEl) oldNumberEl.style.color = '';
+      if (prevNumberEl) prevNumberEl.style.color = '';
     }
 
     info.dayEl.style.backgroundColor = theme.yellow['500'];
@@ -73,25 +85,38 @@ export default function Calendar({
       '.fc-daygrid-day-number span'
     ) as HTMLElement;
     if (numberEl) numberEl.style.color = theme.gray['900'];
+
     lastSelectedEl.current = info.dayEl;
+  };
+
+  const handleDayCellMount = (arg: DayCellMountArg) => {
+    const dateStr = arg.date.toISOString().split('T')[0];
+    const numberEl = arg.el.querySelector(
+      '.fc-daygrid-day-number span'
+    ) as HTMLElement;
+
+    const isOtherMonth = arg.el.classList.contains('fc-day-other');
+    const isUnavailable = unavailableDates.includes(dateStr);
+
+    if (numberEl && (isOtherMonth || isUnavailable)) {
+      numberEl.style.color = theme.gray['500'];
+    }
   };
 
   return (
     <FullCalendar
+      key={JSON.stringify(unavailableDates)}
       ref={calendarRef}
       plugins={[dayGridPlugin, interactionPlugin]}
       initialView="dayGridMonth"
       timeZone="Asia/Seoul"
       locale="ko"
-      dayCellContent={dayCellContent}
       height="auto"
       selectable
+      dayCellContent={dayCellContent}
+      dayCellDidMount={handleDayCellMount}
       dateClick={handleDateClick}
-      headerToolbar={{
-        left: '',
-        center: 'prev title next',
-        right: '',
-      }}
+      headerToolbar={{ left: '', center: 'title', right: '' }}
     />
   );
 }
