@@ -2,22 +2,54 @@ import * as S from './style.css';
 import NavigationBar from '@/components/layout/NavigationBar';
 import Header from '@/components/layout/Header';
 import { SpaceData } from '@/shared/libs/spaceData';
+import { useReserveInfo } from '@/features/spaceOwner/services/spaceOwner.query';
 
 export default function Dashboard() {
+  const { data: reservationInfo } = useReserveInfo();
+
+  const formatToAmPmHour = (isoString: string) => {
+    const date = new Date(isoString);
+
+    const hours = date.getUTCHours();
+    const minutes = date.getUTCMinutes();
+    const period = hours < 12 ? '오전' : '오후';
+    const hour = hours % 12 === 0 ? 12 : hours % 12;
+    const paddedMinutes = String(minutes).padStart(2, '0');
+
+    return `${period} ${hour}시 ${paddedMinutes}분`;
+  };
+
+
   return (
     <div className={S.container}>
       <Header />
       <div className={S.contentContainer}>
         <div className={S.todayReservationContainer}>
-          <p className={S.todayReservation}>오늘은 0건의 예약이 있습니다.</p>
+          <p className={S.todayReservation}>
+            오늘은{' '}
+            {reservationInfo === undefined ? '0' : reservationInfo?.count}
+            건의 예약이 있습니다.
+          </p>
           <div className={S.reservationTimeContainer}>
             <div className={S.reservationTimeWrapper}>
               <p className={S.timeLabel}>첫 입실 시간</p>
-              <p className={S.timeValue}>예약 정보 없음</p>
+              <p className={S.timeValue}>
+                {reservationInfo === undefined
+                  ? '로딩 중...'
+                  : reservationInfo.firstEnterTime === null
+                    ? '예정된 예약 없음'
+                    : formatToAmPmHour(reservationInfo.firstEnterTime)}
+              </p>
             </div>
             <div className={S.reservationTimeWrapper}>
               <p className={S.timeLabel}>마지막 퇴실 시간</p>
-              <p className={S.timeValue}>예약 정보 없음</p>
+              <p className={S.timeValue}>
+                {reservationInfo === undefined
+                  ? '로딩 중...'
+                  : reservationInfo.lastLeaveTime === null
+                    ? '예정된 예약 없음'
+                    : formatToAmPmHour(reservationInfo.lastLeaveTime)}
+              </p>
             </div>
           </div>
         </div>
