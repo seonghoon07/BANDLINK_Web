@@ -1,8 +1,8 @@
 import * as S from './style.css';
 import NavigationBar from '@/components/layout/NavigationBar';
 import Header from '@/components/layout/Header';
-import { SpaceData } from '@/shared/libs/spaceData';
 import {
+  useMyPlace,
   useReserveInfo,
   useRevenue,
 } from '@/features/spaceOwner/services/spaceOwner.query';
@@ -10,6 +10,7 @@ import {
 export default function Dashboard() {
   const { data: reservationInfo } = useReserveInfo();
   const { data: revenue } = useRevenue();
+  const { data: place } = useMyPlace();
 
   const formatToAmPmHour = (isoString: string) => {
     const date = new Date(isoString);
@@ -19,6 +20,16 @@ export default function Dashboard() {
     const hour = hours % 12 === 0 ? 12 : hours % 12;
     const paddedMinutes = String(minutes).padStart(2, '0');
     return `${period} ${hour}시 ${paddedMinutes}분`;
+  };
+
+  const formatRawTimeToAmPm = (time: string) => {
+    const [hourStr, minuteStr] = time.split(':');
+    const hour = parseInt(hourStr, 10);
+    const minute = parseInt(minuteStr, 10);
+    const period = hour < 12 ? '오전' : '오후';
+    const formattedHour = hour % 12 === 0 ? 12 : hour % 12;
+    const paddedMinute = String(minute).padStart(2, '0');
+    return `${period} ${formattedHour}시 ${paddedMinute}분`;
   };
 
   const difference =
@@ -43,8 +54,8 @@ export default function Dashboard() {
   return (
     <div className={S.container}>
       <Header />
+
       <div className={S.contentContainer}>
-        {/* 오늘의 예약 */}
         <div className={S.todayReservationContainer}>
           <p className={S.todayReservation}>
             오늘은 {reservationInfo?.count ?? 0}건의 예약이 있습니다.
@@ -75,7 +86,6 @@ export default function Dashboard() {
           </div>
         </div>
 
-        {/* 수익 정보 */}
         <div className={S.revenueBox}>
           <div className={S.monthRevenueWrapper}>
             <p className={S.categoryLabel}>이번 달 누적 수익</p>
@@ -83,6 +93,7 @@ export default function Dashboard() {
               {revenue ? `${revenue.currentRevenue.toLocaleString()}원` : '-'}
             </p>
           </div>
+
           <div className={S.monthRevenueWrapper}>
             <p className={S.categoryLabel}>지난 달 대비</p>
             <p className={S.categoryValue}>
@@ -91,29 +102,37 @@ export default function Dashboard() {
           </div>
         </div>
 
-        {/* 공간 정보 */}
         <div className={S.mySpaceContainer}>
           <p className={S.mySpaceTitle}>내 공간</p>
-          {SpaceData.spaceName ? (
+
+          {place === undefined ? (
+            <div className={S.emptySpaceWrapper}>
+              <p className={S.emptyText}>장소를 불러오는 중입니다...</p>
+            </div>
+          ) : place === null ? (
+            <div className={S.emptySpaceWrapper}>
+              <p className={S.emptyText}>등록된 장소가 없습니다!</p>
+            </div>
+          ) : (
             <div className={S.mySpaceWrapper}>
               <img
                 className={S.spaceImage}
                 alt="장소 이미지"
-                src={SpaceData.spaceImage}
+                src={place.imageUrl}
               />
               <div className={S.spaceInfoWrapper}>
-                <p className={S.placeName}>{SpaceData.spaceName}</p>
-                <p className={S.placeAddress}>{SpaceData.spaceAddress}</p>
-                <p className={S.businessHours}>{SpaceData.businessHours}</p>
+                <p className={S.placeName}>{place.name}</p>
+                <p className={S.placeAddress}>{place.address}</p>
+                <p className={S.businessHours}>
+                  {formatRawTimeToAmPm(place.openTime)} ~{' '}
+                  {formatRawTimeToAmPm(place.closeTime)}
+                </p>
               </div>
-            </div>
-          ) : (
-            <div className={S.emptySpaceWrapper}>
-              <p className={S.emptyText}>등록된 장소가 없습니다!</p>
             </div>
           )}
         </div>
       </div>
+
       <NavigationBar />
     </div>
   );

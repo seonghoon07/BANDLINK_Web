@@ -9,3 +9,8 @@ export const getRevenue = async () => {
   const { data } = await customAxios.get('/roomReservation/revenue');
   return data;
 };
+
+export const getMyPlace = async () => {
+  const { data } = await customAxios.get('/places/my');
+  return data;
+};
