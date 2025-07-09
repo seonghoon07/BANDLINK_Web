@@ -4,3 +4,8 @@ export const getReserveInfo = async () => {
   const { data } = await customAxios.get('/places/reserveInfo');
   return data;
 };
+
+export const getRevenue = async () => {
+  const { data } = await customAxios.get('/roomReservation/revenue');
+  return data;
+};

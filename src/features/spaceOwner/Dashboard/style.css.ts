@@ -85,6 +85,14 @@ export const yellowColor = style({
   color: theme.yellow['500'],
 });
 
+export const redColor = style({
+  color: theme.red,
+});
+
+export const blueColor = style({
+  color: theme.blue,
+});
+
 export const mySpaceContainer = style({
   width: '100%',
   height: '100%',
