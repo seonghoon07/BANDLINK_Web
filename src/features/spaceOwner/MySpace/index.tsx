@@ -5,25 +5,15 @@ import Button from '@/components/common/Button';
 import RoomItem from '@/components/RoomItem';
 import { useMyPlace } from '@/features/spaceOwner/services/spaceOwner.query';
 import { RoomType } from '@/shared/types/roomType';
+import { getKoreanOffDays } from '@/shared/utils/restDay';
 
 export default function MySpace() {
   const navigate = useNavigate();
-  const englishDays = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
-  const dayMap: Record<string, string> = {
-    Mon: '월',
-    Tue: '화',
-    Wed: '수',
-    Thu: '목',
-    Fri: '금',
-    Sat: '토',
-    Sun: '일',
-  };
   const { data: place } = useMyPlace();
 
-  const offDays = englishDays
-    .filter((day) => !place?.businessDays.includes(day))
-    .map((day) => dayMap[day])
-    .join(', ');
+  const offDays = place?.businessDays
+    ? getKoreanOffDays(place.businessDays).join(', ')
+    : '';
 
   return (
     <div className={S.container}>

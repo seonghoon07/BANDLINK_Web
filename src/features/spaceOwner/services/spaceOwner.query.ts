@@ -4,6 +4,7 @@ import {
   getMyPlace,
   getReserveInfo,
   getRevenue,
+  getRoomDetail,
 } from '@/features/spaceOwner/services/spaceOwner.api';
 
 export const useReserveInfo = () => {
@@ -24,5 +25,12 @@ export const useMyPlace = () => {
   return useQuery({
     queryKey: [spaceOwnerKeys.myPlace],
     queryFn: getMyPlace,
+  });
+};
+
+export const useRoomDetail = (roomId: string) => {
+  return useQuery({
+    queryKey: [spaceOwnerKeys.roomDetail],
+    queryFn: () => getRoomDetail(roomId),
   });
 };
