@@ -2,12 +2,28 @@ import * as S from './style.css';
 import { useNavigate } from 'react-router-dom';
 import NavigationBar from '@/components/layout/NavigationBar';
 import Button from '@/components/common/Button';
-import { SpaceImage } from '@/assets';
 import RoomItem from '@/components/RoomItem';
+import { useMyPlace } from '@/features/spaceOwner/services/spaceOwner.query';
+import { RoomType } from '@/shared/types/roomType';
 
 export default function MySpace() {
   const navigate = useNavigate();
-  const isRoom = false;
+  const englishDays = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+  const dayMap: Record<string, string> = {
+    Mon: '월',
+    Tue: '화',
+    Wed: '수',
+    Thu: '목',
+    Fri: '금',
+    Sat: '토',
+    Sun: '일',
+  };
+  const { data: place } = useMyPlace();
+
+  const offDays = englishDays
+    .filter((day) => !place?.businessDays.includes(day))
+    .map((day) => dayMap[day])
+    .join(', ');
 
   return (
     <div className={S.container}>
@@ -15,57 +31,32 @@ export default function MySpace() {
         <header className={S.headerContainer}>
           <p className={S.headerText}>내 공간</p>
         </header>
-        {isRoom ? (
+        {place ? (
           <>
             <div className={S.spaceInfoWrapper}>
-              <img className={S.spaceImg} alt="장소 이미지" src={SpaceImage} />
+              <img
+                className={S.spaceImg}
+                alt="장소 이미지"
+                src={place?.imageUrl}
+              />
               <div className={S.textInfoWrapper}>
-                <p className={S.spaceName}>
-                  디어뮤직 스튜디오 24시간 무인 음악연습실&합주실
-                </p>
-                <p className={S.spaceAddress}>부산 남구 문현동</p>
+                <p className={S.spaceName}>{place.name}</p>
+                <p className={S.spaceAddress}>{place.address}</p>
                 <p className={S.restDay}>
-                  매주 <span className={S.redColor}>토, 일</span> 휴무
+                  매주 <span className={S.redColor}>{offDays}</span> 휴무
                 </p>
               </div>
             </div>
             <div className={S.roomWrapper}>
-              <RoomItem
-                roomname={'[ROOM X] 합주실 1'}
-                price={14000}
-                description={
-                  '설명입니다설명입니다설명입니다설명입니다설명입니다설명입니다설명입니다설명입니다'
-                }
-                imgUrl={SpaceImage}
-                onClick={() => navigate('/spaceOwner/space/room/1')}
-              />
-              <RoomItem
-                roomname={'[ROOM X] 합주실 1'}
-                price={14000}
-                description={
-                  '설명입니다설명입니다설명입니다설명입니다설명입니다설명입니다설명입니다설명입니다'
-                }
-                imgUrl={SpaceImage}
-                onClick={() => {}}
-              />
-              <RoomItem
-                roomname={'[ROOM X] 합주실 1'}
-                price={14000}
-                description={
-                  '설명입니다설명입니다설명입니다설명입니다설명입니다설명입니다설명입니다설명입니다'
-                }
-                imgUrl={SpaceImage}
-                onClick={() => {}}
-              />
-              <RoomItem
-                roomname={'[ROOM X] 합주실 1'}
-                price={14000}
-                description={
-                  '설명입니다설명입니다설명입니다설명입니다설명입니다설명입니다설명입니다설명입니다'
-                }
-                imgUrl={SpaceImage}
-                onClick={() => {}}
-              />
+              {place?.rooms?.map((room: RoomType) => (
+                <RoomItem
+                  roomname={room.name}
+                  price={room.price}
+                  description={room.description}
+                  imgUrl={room.imageUrl}
+                  onClick={() => navigate(`/spaceOwner/space/room/${room.id}`)}
+                />
+              ))}
             </div>
           </>
         ) : (
@@ -80,12 +71,12 @@ export default function MySpace() {
           size="lg"
           color="primary"
           onClick={() =>
-            isRoom
+            place
               ? navigate('/spaceOwner/space/create')
               : navigate('/spaceOwner/space/create')
           }
         >
-          {isRoom ? '수정하기' : '등록하기'}
+          {place ? '수정하기' : '등록하기'}
         </Button>
       </div>
       <NavigationBar />
