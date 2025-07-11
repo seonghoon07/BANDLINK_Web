@@ -1,4 +1,5 @@
 import { customAxios } from '@/shared/api';
+import { PlaceType } from '@/shared/types/placeType';
 
 export const getReserveInfo = async () => {
   const { data } = await customAxios.get('/places/reserveInfo');
@@ -12,10 +13,16 @@ export const getRevenue = async () => {
 
 export const getMyPlace = async () => {
   const { data } = await customAxios.get('/places/my');
+  if (data === '') return null;
   return data;
 };
 
 export const getRoomDetail = async (roomId: string) => {
   const { data } = await customAxios.get(`/rooms/${roomId}`);
+  return data;
+};
+
+export const postCreatePlace = async (placeBody: PlaceType) => {
+  const { data } = await customAxios.post('/places', placeBody);
   return data;
 };

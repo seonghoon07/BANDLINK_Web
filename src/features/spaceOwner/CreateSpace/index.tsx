@@ -8,28 +8,44 @@ import { useNavigate } from 'react-router-dom';
 import Button from '@/components/common/Button';
 import RoomItem from '@/components/RoomItem';
 import BusinessTime from '@/features/spaceOwner/CreateSpace/components/BusinessTime';
+import DaumPostcodeEmbed from 'react-daum-postcode';
+// import { useCreatePlace } from '@/features/spaceOwner/services/spaceOwner.mutation';
 
 export default function CreateSpace() {
-  const placeType = ['합주실', '소극장'];
-  const weeks = ['월', '화', '수', '목', '금', '토', '일'];
+  const placeType = ['합주실', '공연장'];
+  const weeks = [
+    { label: '월', value: 'Mon' },
+    { label: '화', value: 'Tue' },
+    { label: '수', value: 'Wed' },
+    { label: '목', value: 'Thu' },
+    { label: '금', value: 'Fri' },
+    { label: '토', value: 'Sat' },
+    { label: '일', value: 'Sun' },
+  ];
   const navigate = useNavigate();
-  const reader = new FileReader();
   const [isUpload, setIsUpload] = useState(false);
-  const [uploadImage, setUploadImage] = useState('');
+  const [uploadImage, setUploadImage] = useState<File | null>(null);
+  const previewUrl = uploadImage ? URL.createObjectURL(uploadImage) : '';
   const [selectedPlaceTypes, setSelectedPlaceTypes] = useState<string[]>([]);
   const [selectedBusinessDays, setSelectedBusinessDays] = useState<string[]>(
     []
   );
+  const [isFindAddressClick, setIsFindAddressClick] = useState(false);
+  const [placeName, setPlaceName] = useState<string>('');
+  const [postCode, setPostCode] = useState<string>('');
+  const [businessNumber, setBusinessNumber] = useState<string>('');
+  const [address, setAddress] = useState<string>('');
+  const [detailAddress, setDetailAddress] = useState<string>('');
   const [isRoomExists] = useState<boolean>(true);
   const inputRef = useRef<HTMLInputElement>(null);
+  // const { mutate: createPlaceMutate } = useCreatePlace();
 
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (!e.target.files) return;
-    reader.readAsDataURL(e.target.files[0]);
-    reader.onload = () => {
-      setUploadImage(reader.result as string);
+    const file = e.target.files?.[0];
+    if (file) {
+      setUploadImage(file);
       setIsUpload(true);
-    };
+    }
   };
 
   const handleImageUploadBtn = () => {
@@ -50,6 +66,31 @@ export default function CreateSpace() {
     );
   };
 
+  const formatBusinessNumber = (raw: string) => {
+    if (!/^\d{10}$/.test(raw)) return raw;
+    return `${raw.slice(0, 3)}-${raw.slice(3, 5)}-${raw.slice(5)}`;
+  };
+
+  const onCreateBtnClick = () => {
+    const placeBody = {
+      place: {
+        image: uploadImage,
+        name: placeName,
+        type: selectedPlaceTypes,
+        businessRegistrationNumber: formatBusinessNumber(businessNumber),
+        businessDays: selectedBusinessDays,
+        address: `${address} (${detailAddress})`,
+      },
+    };
+    console.log(placeBody);
+  };
+
+  const handleCompletePost = (data: any) => {
+    setAddress(data.address);
+    setPostCode(data.zonecode);
+    setIsFindAddressClick(false);
+  };
+
   return (
     <div className={S.container}>
       <header className={S.header}>
@@ -67,7 +108,7 @@ export default function CreateSpace() {
           />
           {isUpload ? (
             <img
-              src={uploadImage}
+              src={previewUrl}
               className={S.previewImage}
               alt="업로드된 이미지"
             />
@@ -84,6 +125,52 @@ export default function CreateSpace() {
           <input
             className={S.placeNameInput}
             placeholder="장소명을 입력해주세요."
+            value={placeName}
+            onChange={(e) => setPlaceName(e.target.value)}
+          />
+        </div>
+        <div className={S.categoryContainer}>
+          <p className={S.categoryLabel}>주소</p>
+          <div className={S.addressWrapper}>
+            <input
+              className={S.placeNameInput}
+              placeholder="00000"
+              disabled
+              value={postCode}
+              onChange={(e) => setPostCode(e.target.value)}
+            />
+            <button
+              className={S.findAddressBtn}
+              onClick={() => setIsFindAddressClick(!isFindAddressClick)}
+            >
+              주소 찾기
+            </button>
+          </div>
+          {isFindAddressClick && (
+            <DaumPostcodeEmbed onComplete={handleCompletePost} />
+          )}
+
+          {address && (
+            <>
+              <div className={S.address}>{address}</div>
+              <input
+                className={S.placeNameInput}
+                placeholder="상세 주소를 입력해주세요"
+                value={detailAddress}
+                onChange={(e) => setDetailAddress(e.target.value)}
+              />
+            </>
+          )}
+        </div>
+        <div className={S.categoryContainer}>
+          <p className={S.categoryLabel}>사업자 등록 번호</p>
+          <input
+            className={S.placeNameInput}
+            placeholder="예: 1234567890"
+            maxLength={10}
+            type="number"
+            value={businessNumber}
+            onChange={(e) => setBusinessNumber(e.target.value)}
           />
         </div>
         <div className={S.dividerLine} />
@@ -106,10 +193,10 @@ export default function CreateSpace() {
           <div className={S.placeTypeWrapper}>
             {weeks.map((day) => (
               <BusinessDay
-                key={day}
-                label={day}
-                selected={selectedBusinessDays.includes(day)}
-                onClick={() => handleBusinessDaySelect(day)}
+                key={day.label}
+                label={day.label}
+                selected={selectedBusinessDays.includes(day.value)}
+                onClick={() => handleBusinessDaySelect(day.value)}
               />
             ))}
           </div>
@@ -148,7 +235,12 @@ export default function CreateSpace() {
           )}
         </div>
         <div className={S.dividerLine} />
-        <Button type="submit" size="lg" color="primary">
+        <Button
+          type="submit"
+          size="lg"
+          color="primary"
+          onClick={onCreateBtnClick}
+        >
           장소 등록
         </Button>
       </div>

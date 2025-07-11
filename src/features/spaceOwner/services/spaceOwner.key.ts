@@ -3,4 +3,5 @@ export const spaceOwnerKeys = {
   revenue: 'spaceOwner.query.revenue',
   myPlace: 'spaceOwner.query.myPlace',
   roomDetail: 'spaceOwner.query.roomDetail',
+  createPlace: 'spaceOwner.query.createPlace',
 };
