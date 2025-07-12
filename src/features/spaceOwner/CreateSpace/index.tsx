@@ -12,7 +12,7 @@ import DaumPostcodeEmbed from 'react-daum-postcode';
 import { CreateRoomType, SelectedTimeType } from '@/shared/types';
 import { useAtom } from 'jotai/index';
 import { createRoomAtom } from '@/shared/store/createRoomAtom';
-// import { useCreatePlace } from '@/features/spaceOwner/services/spaceOwner.mutation';
+import { useCreatePlace } from '@/features/spaceOwner/services/spaceOwner.mutation';
 
 export default function CreateSpace() {
   const placeType = ['합주실', '공연장'];
@@ -48,7 +48,7 @@ export default function CreateSpace() {
   });
   const [roomList] = useAtom(createRoomAtom);
   const inputRef = useRef<HTMLInputElement>(null);
-  // const { mutate: createPlaceMutate } = useCreatePlace();
+  const { mutate: createPlaceMutate } = useCreatePlace();
 
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -81,21 +81,54 @@ export default function CreateSpace() {
     return `${raw.slice(0, 3)}-${raw.slice(3, 5)}-${raw.slice(5)}`;
   };
 
-  const onCreateBtnClick = () => {
-    const placeBody = {
-      place: {
-        image: uploadImage,
-        name: placeName,
-        type: selectedPlaceTypes,
-        businessRegistrationNumber: formatBusinessNumber(businessNumber),
-        businessDays: selectedBusinessDays,
-        address: `${address} (${detailAddress})`,
-        openTime: `${selectedTimes.open.hour}:${selectedTimes.open.minute}`,
-        closeTime: `${selectedTimes.close.hour}:${selectedTimes.close.minute}`,
-        rooms: roomList,
-      },
+  const onCreateBtnClick = async () => {
+    const formData = new FormData();
+
+    if (uploadImage) {
+      formData.append('placeImage', uploadImage);
+    } else {
+      alert('이미지를 등록해주세요');
+      return;
+    }
+
+    roomList.forEach((room: CreateRoomType) => {
+      if (room.image) {
+        formData.append('roomImages', room.image);
+      }
+    });
+
+    const placeData = {
+      name: placeName,
+      type: selectedPlaceTypes,
+      businessRegistrationNumber: formatBusinessNumber(businessNumber),
+      businessDays: selectedBusinessDays,
+      address: `${address} (${detailAddress})`,
+      openTime: `${selectedTimes.open.hour}:${selectedTimes.open.minute}`,
+      closeTime: `${selectedTimes.close.hour}:${selectedTimes.close.minute}`,
+      image: null, // 서버에서 채워줄 필드
     };
-    console.log(placeBody);
+
+    const roomData = roomList.map((room) => ({
+      name: room.name,
+      description: room.description,
+      additionalDescription: room.additionalDescription,
+      price: room.price,
+      image: null, // 서버에서 채워줄 필드
+    }));
+
+    const dto = {
+      place: placeData,
+      rooms: roomData,
+    };
+
+    formData.append('dto', JSON.stringify(dto));
+
+    createPlaceMutate(formData, {
+      onSuccess: () => {
+        alert('장소를 생성하였습니다.');
+        navigate('/spaceOwner/space');
+      },
+    });
   };
 
   const handleCompletePost = (data: any) => {
