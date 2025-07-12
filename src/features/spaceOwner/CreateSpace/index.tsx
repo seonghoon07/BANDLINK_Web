@@ -3,12 +3,15 @@ import * as S from './style.css';
 import NavigationBar from '@/components/layout/NavigationBar';
 import { BusinessDay } from '@/features/spaceOwner/CreateSpace/components/BusinessDay';
 import { PlaceType } from '@/features/spaceOwner/CreateSpace/components/PlaceType';
-import { AddIcon, ArrowIcon, SpaceImage } from '@/assets';
+import { AddIcon, ArrowIcon } from '@/assets';
 import { useNavigate } from 'react-router-dom';
 import Button from '@/components/common/Button';
 import RoomItem from '@/components/RoomItem';
 import BusinessTime from '@/features/spaceOwner/CreateSpace/components/BusinessTime';
 import DaumPostcodeEmbed from 'react-daum-postcode';
+import { CreateRoomType, SelectedTimeType } from '@/shared/types';
+import { useAtom } from 'jotai/index';
+import { createRoomAtom } from '@/shared/store/createRoomAtom';
 // import { useCreatePlace } from '@/features/spaceOwner/services/spaceOwner.mutation';
 
 export default function CreateSpace() {
@@ -36,7 +39,14 @@ export default function CreateSpace() {
   const [businessNumber, setBusinessNumber] = useState<string>('');
   const [address, setAddress] = useState<string>('');
   const [detailAddress, setDetailAddress] = useState<string>('');
-  const [isRoomExists] = useState<boolean>(true);
+  const [selectedTimes, setSelectedTimes] = useState<{
+    open: SelectedTimeType;
+    close: SelectedTimeType;
+  }>({
+    open: { hour: '00', minute: '00' },
+    close: { hour: '00', minute: '00' },
+  });
+  const [roomList] = useAtom(createRoomAtom);
   const inputRef = useRef<HTMLInputElement>(null);
   // const { mutate: createPlaceMutate } = useCreatePlace();
 
@@ -80,6 +90,9 @@ export default function CreateSpace() {
         businessRegistrationNumber: formatBusinessNumber(businessNumber),
         businessDays: selectedBusinessDays,
         address: `${address} (${detailAddress})`,
+        openTime: `${selectedTimes.open.hour}:${selectedTimes.open.minute}`,
+        closeTime: `${selectedTimes.close.hour}:${selectedTimes.close.minute}`,
+        rooms: roomList,
       },
     };
     console.log(placeBody);
@@ -134,7 +147,7 @@ export default function CreateSpace() {
           <div className={S.addressWrapper}>
             <input
               className={S.placeNameInput}
-              placeholder="00000"
+              placeholder=""
               disabled
               value={postCode}
               onChange={(e) => setPostCode(e.target.value)}
@@ -202,7 +215,10 @@ export default function CreateSpace() {
           </div>
         </div>
         <div className={S.dividerLine} />
-        <BusinessTime />
+        <BusinessTime
+          selectedTimes={selectedTimes}
+          setSelectedTimes={setSelectedTimes}
+        />
         <div className={S.dividerLine} />
         <div className={S.roomWrapper}>
           <div className={S.room}>
@@ -214,17 +230,17 @@ export default function CreateSpace() {
               <p className={S.createRoomText}>방 추가</p>
             </div>
           </div>
-          {isRoomExists ? (
+          {roomList.length !== 0 ? (
             <>
-              <RoomItem
-                roomname="[ROOM X] 합주실 1"
-                price={14000}
-                description={
-                  '설명입니다설명입니다설명입니다설명입니다설명입니다설명입니다설명입니다설명입니다'
-                }
-                imgUrl={SpaceImage}
-                onClick={() => {}}
-              />
+              {roomList.map((room: CreateRoomType) => (
+                <RoomItem
+                  roomname={room.name}
+                  price={room.price}
+                  description={room.description}
+                  imgUrl={URL.createObjectURL(room.image)}
+                  onClick={() => {}}
+                />
+              ))}
             </>
           ) : (
             <div className={S.roomPlaceholder}>

@@ -2,36 +2,38 @@ import * as S from './style.css';
 import BusinessTimePicker from '@/features/spaceOwner/CreateSpace/components/BusinessTimePicker';
 import { ArrowCenterIcon } from '@/assets';
 import { useState } from 'react';
+import { SelectedTimeType } from '@/shared/types';
 
-type selectedTimeType = {
-  hour: string;
-  minute: string;
+type selectedTimesType = {
+  open: SelectedTimeType;
+  close: SelectedTimeType;
 };
 
-export default function BusinessTime() {
-  const [selectedTimes, setSelectedTimes] = useState<{
-    start: selectedTimeType;
-    end: selectedTimeType;
-  }>({
-    start: { hour: '00', minute: '00' },
-    end: { hour: '00', minute: '00' },
-  });
-  const [isTimeClick, setIsTimeClick] = useState<{
-    start: boolean;
-    end: boolean;
-  }>({ start: false, end: false });
+type BusinessTimeProps = {
+  selectedTimes: selectedTimesType;
+  setSelectedTimes: React.Dispatch<React.SetStateAction<selectedTimesType>>;
+};
 
-  const toggleTimeClick = (type: 'start' | 'end') => {
+export default function BusinessTime({
+  selectedTimes,
+  setSelectedTimes,
+}: BusinessTimeProps) {
+  const [isTimeClick, setIsTimeClick] = useState<{
+    open: boolean;
+    close: boolean;
+  }>({ open: false, close: false });
+
+  const toggleTimeClick = (type: 'open' | 'close') => {
     setIsTimeClick((prev) => ({ ...prev, [type]: !prev[type] }));
   };
 
-  const renderTimePicker = (type: 'start' | 'end') => (
+  const renderTimePicker = (type: 'open' | 'close') => (
     <BusinessTimePicker
       onTimeChange={(hour, minute) => handleTimeChange(type, hour, minute)}
     />
   );
 
-  const renderArrowIcon = (type: 'start' | 'end') => (
+  const renderArrowIcon = (type: 'open' | 'close') => (
     <ArrowCenterIcon
       width={20}
       height={20}
@@ -43,7 +45,7 @@ export default function BusinessTime() {
   );
 
   const handleTimeChange = (
-    type: 'start' | 'end',
+    type: 'open' | 'close',
     hour: string,
     minute: string
   ) => {
@@ -59,30 +61,30 @@ export default function BusinessTime() {
       <div className={S.businessTimeContainer}>
         <div
           className={S.startTimeWrapper}
-          onClick={() => toggleTimeClick('start')}
+          onClick={() => toggleTimeClick('open')}
         >
           <p className={S.startTimeLabel}>영업 시작</p>
           <div className={S.timeWrapper}>
             <p
               className={S.time}
-            >{`${selectedTimes.start.hour}시 ${selectedTimes.start.minute}분`}</p>
-            {renderArrowIcon('start')}
+            >{`${selectedTimes.open.hour}시 ${selectedTimes.open.minute}분`}</p>
+            {renderArrowIcon('open')}
           </div>
         </div>
-        {isTimeClick.start && renderTimePicker('start')}
+        {isTimeClick.open && renderTimePicker('open')}
         <div
           className={S.startTimeWrapper}
-          onClick={() => toggleTimeClick('end')}
+          onClick={() => toggleTimeClick('close')}
         >
           <p className={S.startTimeLabel}>영업 종료</p>
           <div className={S.timeWrapper}>
             <p
               className={S.time}
-            >{`${selectedTimes.end.hour}시 ${selectedTimes.end.minute}분`}</p>
-            {renderArrowIcon('end')}
+            >{`${selectedTimes.close.hour}시 ${selectedTimes.close.minute}분`}</p>
+            {renderArrowIcon('close')}
           </div>
         </div>
-        {isTimeClick.end && renderTimePicker('end')}
+        {isTimeClick.close && renderTimePicker('close')}
       </div>
     </div>
   );

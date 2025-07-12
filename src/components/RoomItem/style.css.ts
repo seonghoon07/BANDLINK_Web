@@ -17,7 +17,7 @@ export const roomContainer = style({
 
 export const roomInfoWrapper = style({
   ...flex.COLUMN_FLEX,
-  width: '100%',
+  width: '70%',
   gap: '4px',
 });
 
@@ -48,5 +48,4 @@ export const roomImg = style({
   height: '80px',
   borderRadius: '8px',
   objectFit: 'cover',
-  objectPosition: 'center',
 });
