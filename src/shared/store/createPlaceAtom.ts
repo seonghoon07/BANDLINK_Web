@@ -22,7 +22,7 @@ export interface PlaceState {
   };
 }
 
-export const createPlaceAtom = atom<PlaceState>({
+export const initialPlaceState = {
   uploadImage: null,
   isUpload: false,
   selectedPlaceTypes: [],
@@ -37,4 +37,6 @@ export const createPlaceAtom = atom<PlaceState>({
     open: { hour: '00', minute: '00' },
     close: { hour: '00', minute: '00' },
   },
-});
+};
+
+export const createPlaceAtom = atom<PlaceState>(initialPlaceState);

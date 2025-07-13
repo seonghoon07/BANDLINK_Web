@@ -13,12 +13,16 @@ import { PlaceType } from '@/features/spaceOwner/CreateSpace/components/PlaceTyp
 import { AddIcon, ArrowIcon } from '@/assets';
 
 import { createRoomAtom } from '@/shared/store/createRoomAtom';
-import { createPlaceAtom } from '@/shared/store/createPlaceAtom';
+import {
+  createPlaceAtom,
+  initialPlaceState,
+} from '@/shared/store/createPlaceAtom';
 import { useCreatePlace } from '@/features/spaceOwner/services/spaceOwner.mutation';
+import { isCreateSpaceEmpty } from '@/shared/helpers/isCreateSpaceEmpty';
 
 export default function CreateSpace() {
   const navigate = useNavigate();
-  const [roomList] = useAtom(createRoomAtom);
+  const [roomList, setRoomList] = useAtom(createRoomAtom);
   const [placeState, setPlaceState] = useAtom(createPlaceAtom);
   const inputRef = useRef<HTMLInputElement>(null);
   const { mutate: createPlaceMutate } = useCreatePlace();
@@ -119,9 +123,29 @@ export default function CreateSpace() {
     createPlaceMutate(formData, {
       onSuccess: () => {
         alert('장소를 생성하였습니다.');
+        setPlaceState(initialPlaceState);
+        setRoomList([]);
         navigate('/spaceOwner/space');
       },
     });
+  };
+
+  const handleExitClick = () => {
+    const isEmpty = isCreateSpaceEmpty(placeState, roomList);
+    if (isEmpty) {
+      navigate('/spaceOwner/space');
+    } else {
+      const isExit = confirm(
+        '입력한 정보가 모두 초기화됩니다. 정말 나가시겠습니까?'
+      );
+      if (isExit) {
+        setPlaceState(initialPlaceState);
+        setRoomList([]);
+        navigate('/spaceOwner/space');
+      } else {
+        return;
+      }
+    }
   };
 
   const placeType = ['합주실', '공연장'];
@@ -138,7 +162,7 @@ export default function CreateSpace() {
   return (
     <div className={S.container}>
       <header className={S.header}>
-        <ArrowIcon onClick={() => navigate('/spaceOwner/space')} />
+        <ArrowIcon onClick={handleExitClick} />
       </header>
 
       <div className={S.contentContainer}>
