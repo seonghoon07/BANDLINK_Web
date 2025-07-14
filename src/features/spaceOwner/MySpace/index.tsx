@@ -62,7 +62,7 @@ export default function MySpace() {
           color="primary"
           onClick={() =>
             place
-              ? navigate('/spaceOwner/space/create')
+              ? navigate('/spaceOwner/space/fix')
               : navigate('/spaceOwner/space/create')
           }
         >

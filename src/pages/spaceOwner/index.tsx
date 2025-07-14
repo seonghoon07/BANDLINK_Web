@@ -4,3 +4,4 @@ export { default as RoomPage } from './RoomPage';
 export { default as CreatePlacePage } from './CreateSpacePage';
 export { default as CreateRoomPage } from './CreateRoomPage';
 export { default as ReservationsPage } from './ReservationsPage';
+export { default as FixPlacePage } from './FixSpacePage';
