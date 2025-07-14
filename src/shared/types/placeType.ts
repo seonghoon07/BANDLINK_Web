@@ -9,5 +9,12 @@ export type PlaceType = {
   businessDays: string[];
   openTime: string;
   closeTime: string;
-  rooms: { id: number; price: number }[];
+  rooms: {
+    id: number;
+    imageUrl: string;
+    name: string;
+    description: string;
+    additionalDescription: string;
+    price: number;
+  }[];
 };

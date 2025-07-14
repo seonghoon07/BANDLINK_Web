@@ -81,6 +81,31 @@ export const placeNameInput = style({
   },
 });
 
+export const addressWrapper = style({
+  width: '100%',
+  ...flex.FLEX,
+  gap: '8px',
+});
+
+export const findAddressBtn = style({
+  ...flex.CENTER,
+  padding: '12px 16px',
+  borderRadius: '4px',
+  backgroundColor: theme.yellow['500'],
+  ...font.btn1,
+  color: theme.black,
+  whiteSpace: 'nowrap',
+});
+
+export const address = style({
+  width: '100%',
+  backgroundColor: theme.gray['800'],
+  borderRadius: '4px',
+  padding: '12px 16px',
+  color: theme.white,
+  ...font.p1,
+});
+
 export const placeTypeWrapper = style({
   ...flex.FLEX,
   gap: '12px',

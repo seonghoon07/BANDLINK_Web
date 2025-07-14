@@ -30,6 +30,7 @@ import {
   RoomPage,
   SpaceOwnerDashboardPage,
   ReservationsPage,
+  FixPlacePage,
 } from '@/pages/spaceOwner';
 
 export default function Router() {
@@ -74,6 +75,7 @@ export default function Router() {
         element={<CreateRoomPage />}
       />
       <Route path="/spaceOwner/reservations" element={<ReservationsPage />} />
+      <Route path="/spaceOwner/space/fix" element={<FixPlacePage />} />
     </Routes>
   );
 }

@@ -1,9 +1,9 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAtom } from 'jotai';
 import DaumPostcodeEmbed from 'react-daum-postcode';
 
-import * as S from './style.css';
+import * as S from '../CreateSpace/style.css';
 import NavigationBar from '@/components/layout/NavigationBar';
 import Button from '@/components/common/Button';
 import RoomItem from '@/components/RoomItem';
@@ -17,19 +17,61 @@ import {
   createPlaceAtom,
   initialPlaceState,
 } from '@/shared/store/createPlaceAtom';
-import { useCreatePlace } from '@/features/spaceOwner/services/spaceOwner.mutation';
 import { isCreateSpaceEmpty } from '@/shared/helpers/isCreateSpaceEmpty';
+import { useMyPlace } from '@/features/spaceOwner/services/spaceOwner.query';
+import { RoomType } from '@/shared/types/roomType';
 
-export default function CreateSpace() {
+export default function FixSpace() {
   const navigate = useNavigate();
   const [roomList, setRoomList] = useAtom(createRoomAtom);
   const [placeState, setPlaceState] = useAtom(createPlaceAtom);
   const inputRef = useRef<HTMLInputElement>(null);
-  const { mutate: createPlaceMutate } = useCreatePlace();
+  const { data: myPlace } = useMyPlace();
+
+  useEffect(() => {
+    if (!myPlace) return;
+
+    const [address, detail] = myPlace.address.split(' (');
+    const detailAddress = detail?.replace(/\)$/, '') ?? '';
+
+    setPlaceState((prev) => ({
+      ...prev,
+      placeName: myPlace.name,
+      businessNumber: myPlace.businessRegistrationNumber.replace(/-/g, ''),
+      selectedPlaceTypes: myPlace.type,
+      selectedBusinessDays: myPlace.businessDays,
+      address,
+      detailAddress,
+      postCode: myPlace.postCode,
+      selectedTimes: {
+        open: {
+          hour: myPlace.openTime.split(':')[0],
+          minute: myPlace.openTime.split(':')[1],
+        },
+        close: {
+          hour: myPlace.closeTime.split(':')[0],
+          minute: myPlace.closeTime.split(':')[1],
+        },
+      },
+      isUpload: false,
+      uploadImage: null,
+      isFindAddressClick: false,
+    }));
+
+    setRoomList(
+      myPlace.rooms.map((room: RoomType) => ({
+        name: room.name,
+        description: room.description,
+        additionalDescription: room.additionalDescription,
+        price: room.price,
+        image: new File([], room.imageUrl),
+      }))
+    );
+  }, [myPlace]);
 
   const previewUrl = placeState.uploadImage
     ? URL.createObjectURL(placeState.uploadImage)
-    : '';
+    : (myPlace?.imageUrl ?? '');
 
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -119,15 +161,6 @@ export default function CreateSpace() {
     };
 
     formData.append('dto', JSON.stringify(dto));
-
-    createPlaceMutate(formData, {
-      onSuccess: () => {
-        alert('장소를 생성하였습니다.');
-        setPlaceState(initialPlaceState);
-        setRoomList([]);
-        navigate('/spaceOwner/space');
-      },
-    });
   };
 
   const handleExitClick = () => {
@@ -136,7 +169,7 @@ export default function CreateSpace() {
       navigate('/spaceOwner/space');
     } else {
       const isExit = confirm(
-        '입력한 정보가 모두 초기화됩니다. 정말 나가시겠습니까?'
+        '수정한 정보가 모두 사라집니다. 정말 나가시겠습니까?'
       );
       if (isExit) {
         setPlaceState(initialPlaceState);
@@ -175,7 +208,7 @@ export default function CreateSpace() {
             hidden
             onChange={handleImageUpload}
           />
-          {placeState.isUpload ? (
+          {previewUrl ? (
             <img
               src={previewUrl}
               className={S.previewImage}
@@ -354,7 +387,7 @@ export default function CreateSpace() {
           color="primary"
           onClick={onCreateBtnClick}
         >
-          장소 등록
+          장소 수정
         </Button>
       </div>
 

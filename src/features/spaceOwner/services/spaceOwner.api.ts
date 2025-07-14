@@ -12,5 +12,16 @@ export const getRevenue = async () => {
 
 export const getMyPlace = async () => {
   const { data } = await customAxios.get('/places/my');
+  if (data === '') return null;
+  return data;
+};
+
+export const getRoomDetail = async (roomId: string) => {
+  const { data } = await customAxios.get(`/rooms/${roomId}`);
+  return data;
+};
+
+export const postCreatePlace = async (placeBody: FormData) => {
+  const { data } = await customAxios.post('/places', placeBody);
   return data;
 };

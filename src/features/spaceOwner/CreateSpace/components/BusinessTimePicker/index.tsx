@@ -28,7 +28,10 @@ export default function BusinessTimePicker({ onTimeChange }: Props) {
       >
         <Picker.Column name="hour">
           {Array.from({ length: 24 }).map((_, index) => (
-            <Picker.Item key={index} value={index < 10 ? `0${index}` : `${index}`}>
+            <Picker.Item
+              key={index}
+              value={index < 10 ? `0${index}` : `${index}`}
+            >
               {({ selected }) => (
                 <div className={`${S.item} ${selected ? S.selected : ''}`}>
                   {index < 10 ? `0${index}` : index}
