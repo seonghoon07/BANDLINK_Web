@@ -1,6 +1,6 @@
 export const calculateUsedHours = (start: Date, end: Date): number => {
   const diffInMs = end.getTime() - start.getTime();
   const diffInMinutes = diffInMs / (1000 * 60);
-  const usedHours = Math.ceil(diffInMinutes / 60); // 무조건 올림
+  const usedHours = Math.ceil(diffInMinutes / 60);
   return usedHours;
 };

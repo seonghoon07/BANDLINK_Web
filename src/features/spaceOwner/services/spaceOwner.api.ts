@@ -25,3 +25,8 @@ export const postCreatePlace = async (placeBody: FormData) => {
   const { data } = await customAxios.post('/places', placeBody);
   return data;
 };
+
+export const getMyRoomReservation = async () => {
+  const { data } = await customAxios.get('/roomReservation/myRoomReservation');
+  return data;
+};

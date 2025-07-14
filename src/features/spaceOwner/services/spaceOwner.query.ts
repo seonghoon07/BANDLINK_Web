@@ -2,6 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import { spaceOwnerKeys } from '@/features/spaceOwner/services/spaceOwner.key';
 import {
   getMyPlace,
+  getMyRoomReservation,
   getReserveInfo,
   getRevenue,
   getRoomDetail,
@@ -32,5 +33,12 @@ export const useRoomDetail = (roomId: string) => {
   return useQuery({
     queryKey: [spaceOwnerKeys.roomDetail],
     queryFn: () => getRoomDetail(roomId),
+  });
+};
+
+export const useMyRoomReservation = () => {
+  return useQuery({
+    queryKey: [spaceOwnerKeys.myRoomReservation],
+    queryFn: getMyRoomReservation,
   });
 };
