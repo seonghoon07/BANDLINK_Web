@@ -1,5 +1,7 @@
 import * as S from '@/features/user/Profile/style.css';
 import { useNavigate } from 'react-router-dom';
+import { useLogoutUserMutation } from '@/features/user/services/user.mutation';
+import { clearCookie } from '@/shared/utils/cookie/cookie';
 
 interface SettingItem {
   label: string;
@@ -17,7 +19,7 @@ const settingSections: SettingSection[] = [
     title: '계정',
     items: [
       { label: '유저 전환', href: '/role/change' },
-      { label: '로그아웃', danger: true },
+      { label: '로그아웃', href: '/', danger: true },
     ],
   },
   {
@@ -31,10 +33,24 @@ const settingSections: SettingSection[] = [
 
 export default function SettingMenuSection() {
   const navigate = useNavigate();
+  const { mutate: logoutMutate } = useLogoutUserMutation();
 
-  const handleMenuClick = (href: string | undefined) => {
-    if (href) {
-      navigate(href);
+  const handleMenuClick = (item: SettingItem) => {
+    if (item.label === '로그아웃') {
+      const isLogout = confirm('정말로 로그아웃 하시겠습니까?');
+      if (isLogout) {
+        logoutMutate(undefined, {
+          onSuccess: () => {
+            clearCookie();
+            navigate('/');
+          },
+        });
+      }
+      return;
+    }
+
+    if (item.href) {
+      navigate(item.href);
     }
   };
 
@@ -49,7 +65,7 @@ export default function SettingMenuSection() {
             <div
               className={S.menuItemContainer}
               key={item.label}
-              onClick={() => handleMenuClick(item.href)}
+              onClick={() => handleMenuClick(item)}
             >
               <p className={S.menuItem}>
                 <span className={item.danger ? S.warningText : ''}>

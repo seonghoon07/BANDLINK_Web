@@ -18,3 +18,8 @@ export const patchUserRole = async (userRoleBody: {
   const { data } = await customAxios.patch('/users/role', userRoleBody);
   return data;
 };
+
+export const deleteLogout = async () => {
+  const { data } = await customAxios.delete('/auth');
+  return data;
+};
