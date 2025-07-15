@@ -51,9 +51,13 @@ export default function SettingMenuSection() {
           onSuccess: () => {
             clearCookie();
             setType(null);
+            if (item.href) {
+              navigate(item.href);
+            }
           },
         });
       }
+      return;
     }
 
     if (item.label === '회원 탈퇴') {
@@ -63,9 +67,13 @@ export default function SettingMenuSection() {
           onSuccess: () => {
             clearCookie();
             setType(null);
+            if (item.href) {
+              navigate(item.href);
+            }
           },
         });
       }
+      return;
     }
 
     if (item.href) {
