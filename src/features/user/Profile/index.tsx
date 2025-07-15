@@ -20,7 +20,9 @@ export default function Profile() {
           }
           email={user?.email}
         />
-        <InfoSummaryCard type={currentUserRole} point={12400} coupon={0} />
+        {currentUserRole && (
+          <InfoSummaryCard type={currentUserRole} point={12400} coupon={0} />
+        )}
         <SettingMenuSection />
       </div>
       <NavigationBar />

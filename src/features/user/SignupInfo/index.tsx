@@ -60,8 +60,10 @@ export default function SignupInfo() {
 
     await registerUserMutate(requestBody, {
       onSuccess: () => {
-        const path = rolePathMap[currentUserType];
-        navigate(`/${path}/dashboard`);
+        if (currentUserType) {
+          const path = rolePathMap[currentUserType];
+          navigate(`/${path}/dashboard`);
+        }
       },
       onError: (error: any) => {
         const message =
