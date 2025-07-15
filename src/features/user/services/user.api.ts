@@ -23,3 +23,8 @@ export const deleteLogout = async () => {
   const { data } = await customAxios.delete('/auth');
   return data;
 };
+
+export const deleteUser = async () => {
+  const { data } = await customAxios.delete('/auth/delete ');
+  return data;
+};

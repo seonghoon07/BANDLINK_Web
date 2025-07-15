@@ -96,8 +96,8 @@ export default function SignupInfo() {
               </p>
               <p className={S.titleText}>
                 {step === 1
-                  ? '멋진 밴드명을 입력해주세요'
-                  : '멋진 닉네임을 알려주세요'}
+                  ? '멋진 닉네임을 알려주세요'
+                  : '멋진 밴드명을 입력해주세요'}
               </p>
             </>
           ) : (
@@ -115,8 +115,8 @@ export default function SignupInfo() {
               })}
               placeholder={
                 isBand && step === 1
-                  ? '밴드명을 입력해주세요.'
-                  : '닉네임을 입력해주세요.'
+                  ? '닉네임을 입력해주세요.'
+                  : '밴드명을 입력해주세요.'
               }
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
@@ -129,7 +129,7 @@ export default function SignupInfo() {
             type="submit"
             onClick={handleSignupClick}
           >
-            {step === 1 ? '다음으로' : '시작하기'}
+            {step === 1 && isBand ? '다음으로' : '시작하기'}
           </Button>
         </div>
       </div>

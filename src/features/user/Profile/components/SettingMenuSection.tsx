@@ -1,7 +1,12 @@
 import * as S from '@/features/user/Profile/style.css';
 import { useNavigate } from 'react-router-dom';
-import { useLogoutUserMutation } from '@/features/user/services/user.mutation';
+import {
+  useDeleteUserMutation,
+  useLogoutUserMutation,
+} from '@/features/user/services/user.mutation';
 import { clearCookie } from '@/shared/utils/cookie/cookie';
+import { useAtom } from 'jotai/index';
+import { userType } from '@/shared/store/atom';
 
 interface SettingItem {
   label: string;
@@ -20,6 +25,7 @@ const settingSections: SettingSection[] = [
     items: [
       { label: '유저 전환', href: '/role/change' },
       { label: '로그아웃', href: '/', danger: true },
+      { label: '회원 탈퇴', href: '/', danger: true },
     ],
   },
   {
@@ -33,7 +39,9 @@ const settingSections: SettingSection[] = [
 
 export default function SettingMenuSection() {
   const navigate = useNavigate();
+  const [, setType] = useAtom(userType);
   const { mutate: logoutMutate } = useLogoutUserMutation();
+  const { mutate: deleteUserMutate } = useDeleteUserMutation();
 
   const handleMenuClick = (item: SettingItem) => {
     if (item.label === '로그아웃') {
@@ -42,11 +50,22 @@ export default function SettingMenuSection() {
         logoutMutate(undefined, {
           onSuccess: () => {
             clearCookie();
-            navigate('/');
+            setType(null);
           },
         });
       }
-      return;
+    }
+
+    if (item.label === '회원 탈퇴') {
+      const isDeleteUser = confirm('정말로 탈퇴하시겠습니까?');
+      if (isDeleteUser) {
+        deleteUserMutate(undefined, {
+          onSuccess: () => {
+            clearCookie();
+            setType(null);
+          },
+        });
+      }
     }
 
     if (item.href) {

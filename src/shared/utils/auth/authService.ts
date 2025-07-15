@@ -5,7 +5,8 @@ import { RoleType } from '@/shared/types';
 export const authorizeAccess = async (
   accessToken: string,
   refreshToken: string,
-  currentUserType: RoleType
+  currentUserType: RoleType | null,
+  setCurrentUserType: (value: RoleType) => void
 ) => {
   const rolePathMap: Record<RoleType, string> = {
     BAND: 'band',
@@ -24,8 +25,11 @@ export const authorizeAccess = async (
     if (checkAccess && checkRefresh && userInfo === '') {
       window.location.href = '/role';
     } else {
-      const path = rolePathMap[currentUserType];
-      window.location.href = `/${path}/dashboard`;
+      setCurrentUserType(userInfo.roles[0]);
+      if (currentUserType) {
+        const path = rolePathMap[currentUserType];
+        window.location.href = `/${path}/dashboard`;
+      }
     }
 
     return true;
