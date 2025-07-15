@@ -5,11 +5,25 @@ import { useNavigate, useParams } from 'react-router-dom';
 import RoomItem from '@/components/RoomItem';
 import { usePlaceDetails } from '@/features/band/services/band.query';
 import { RoomType } from '@/shared/types/roomType';
+import { useEffect } from 'react';
+import { saveRecentPlaces } from '@/shared/utils/saveRecentPlace';
 
 export default function PlaceDetail() {
   const navigate = useNavigate();
   const { placeId } = useParams<{ placeId: string }>();
   const { data: placeDetails } = usePlaceDetails(placeId!);
+
+  useEffect(() => {
+    if (placeDetails) {
+      saveRecentPlaces({
+        id: placeDetails.id,
+        name: placeDetails.name,
+        address: placeDetails.address,
+        imageUrl: placeDetails.imageUrl,
+      });
+    }
+  }, [placeDetails]);
+
   return (
     <div className={S.placeDetailContainer}>
       <header className={S.placeDetailHeader}>

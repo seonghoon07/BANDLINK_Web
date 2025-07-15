@@ -5,6 +5,7 @@ interface PerformanceCardProps {
   image: string;
   title: string;
   stateText: string;
+  onClick?: () => void;
 }
 
 export default function PerformanceCard({
@@ -12,6 +13,7 @@ export default function PerformanceCard({
   image,
   title,
   stateText,
+  onClick,
 }: PerformanceCardProps) {
   const renderStateText = () => {
     if (type === 'place') {
@@ -26,7 +28,7 @@ export default function PerformanceCard({
   };
 
   return (
-    <div className={S.livePerformanceCard}>
+    <div className={S.livePerformanceCard} onClick={onClick}>
       <img className={S.performanceImg} src={image} alt="공연 이미지" />
       <div className={S.textWrapper}>
         <p className={S.artistName}>{title}</p>
