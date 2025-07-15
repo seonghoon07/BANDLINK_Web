@@ -19,7 +19,7 @@ export default function TicketHistory() {
               title={reserve.title}
               place={reserve.place}
               reservedAt={reserve.reservedAt}
-              price={reserve.price.toLocaleString()}
+              price={reserve.price}
               posterUrl={reserve.posterUrl}
               status="예매완료"
             />

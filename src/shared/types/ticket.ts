@@ -3,7 +3,7 @@ export interface Ticket {
   title: string;
   reservedAt: string;
   place: string;
-  price: string;
+  price: number;
   status: '예매완료' | '취소됨';
   posterUrl: string;
 }
