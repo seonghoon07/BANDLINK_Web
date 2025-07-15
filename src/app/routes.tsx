@@ -1,7 +1,81 @@
-import { Routes } from "react-router-dom";
+import { Route, Routes } from 'react-router-dom';
+import {
+  StartPage,
+  ProfilePage,
+  SignupInfoPage,
+  ChooseRolePage,
+  ChangeRolePage,
+  BandRegistrationPage,
+} from '@/pages/user';
+import {
+  FanDashboardPage,
+  TicketHistoryPage,
+  SearchPerformancePage,
+  PerformanceDetailPage,
+} from '@/pages/fan';
+import {
+  BandDashboardPage,
+  SearchPlacePage,
+  PlaceFilterPage,
+  PlaceDetailPage,
+  RoomReservationPage,
+  MyPerformancePage,
+  PerformanceCreatePage,
+} from '@/pages/band';
+
+import {
+  CreatePlacePage,
+  CreateRoomPage,
+  MySpacePage,
+  RoomPage,
+  SpaceOwnerDashboardPage,
+  ReservationsPage,
+  FixPlacePage,
+} from '@/pages/spaceOwner';
 
 export default function Router() {
-    return (
-        <Routes></Routes>
-    )
+  return (
+    <Routes>
+      <Route path="/" element={<StartPage />} />
+      <Route path="/role" element={<ChooseRolePage />} />
+      <Route path="/role/change" element={<ChangeRolePage />} />
+      <Route path="/nickname" element={<SignupInfoPage />} />
+      <Route path="/bandname" element={<SignupInfoPage />} />
+      <Route path="/register/band/name" element={<BandRegistrationPage />} />
+      <Route path="/fan/dashboard" element={<FanDashboardPage />} />
+      <Route path="/fan/performances" element={<SearchPerformancePage />} />
+      <Route
+        path="/fan/performances/:performanceId"
+        element={<PerformanceDetailPage />}
+      />
+      <Route path="/fan/tickets" element={<TicketHistoryPage />} />
+      <Route path="/profile" element={<ProfilePage />} />
+      <Route path="/band/dashboard" element={<BandDashboardPage />} />
+      <Route path="/band/place" element={<SearchPlacePage />} />
+      <Route path="/band/place/filter" element={<PlaceFilterPage />} />
+      <Route path="/band/place/:placeId" element={<PlaceDetailPage />} />
+      <Route
+        path="/band/place/:placeId/room/:roomId/reserve"
+        element={<RoomReservationPage />}
+      />
+      <Route path="/band/performance" element={<MyPerformancePage />} />
+      <Route
+        path="/band/performance/create"
+        element={<PerformanceCreatePage />}
+      />
+      <Route
+        path="/spaceOwner/dashboard"
+        element={<SpaceOwnerDashboardPage />}
+      />
+      <Route path="/spaceOwner/space" element={<MySpacePage />} />
+      <Route path="/spaceOwner/space/room/:roomId" element={<RoomPage />} />
+      <Route path="/spaceOwner/space/create" element={<CreatePlacePage />} />
+      <Route
+        path="/spaceOwner/space/create/room"
+        element={<CreateRoomPage />}
+      />
+      <Route path="/spaceOwner/reservations" element={<ReservationsPage />} />
+      <Route path="/spaceOwner/space/fix" element={<FixPlacePage />} />
+    </Routes>
+  );
 }
