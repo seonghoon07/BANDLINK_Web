@@ -1,5 +1,5 @@
 import { useMutation } from '@tanstack/react-query';
-import { patchUserRole, postRegister } from '@/features/user/services/user.api';
+import { deleteLogout, deleteUser, patchUserRole, postRegister } from '@/features/user/services/user.api';
 
 export const useRegisterUserMutation = () => {
   return useMutation({
@@ -10,5 +10,17 @@ export const useRegisterUserMutation = () => {
 export const useUpdateUserRoleMutation = () => {
   return useMutation({
     mutationFn: patchUserRole,
+  });
+};
+
+export const useLogoutUserMutation = () => {
+  return useMutation({
+    mutationFn: deleteLogout,
+  });
+};
+
+export const useDeleteUserMutation = () => {
+  return useMutation({
+    mutationFn: deleteUser,
   });
 };

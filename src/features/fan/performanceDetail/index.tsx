@@ -18,7 +18,10 @@ export default function PerformanceDetail() {
     const isReserve = confirm('정말 예약하시겠습니까?');
     if (isReserve) {
       performanceReserveMutate(numberPerformanceId, {
-        onSuccess: () => alert('예약되었습니다.'),
+        onSuccess: () => {
+          alert('예약되었습니다.');
+          navigate('/fan/tickets');
+        },
         onError: () => alert('예약에 실패하였습니다.'),
       });
     }

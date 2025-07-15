@@ -71,13 +71,13 @@ export const monthRevenueWrapper = style({
 
 export const categoryLabel = style({
   ...font.p2,
-  fontWeight: '600px',
+  fontWeight: '600',
   color: theme.gray['300'],
 });
 
 export const categoryValue = style({
   ...font.h4,
-  fontWeight: '500px',
+  fontWeight: '500',
   color: theme.white,
 });
 

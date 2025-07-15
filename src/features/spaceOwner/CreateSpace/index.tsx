@@ -25,7 +25,7 @@ export default function CreateSpace() {
   const [roomList, setRoomList] = useAtom(createRoomAtom);
   const [placeState, setPlaceState] = useAtom(createPlaceAtom);
   const inputRef = useRef<HTMLInputElement>(null);
-  const { mutate: createPlaceMutate } = useCreatePlace();
+  const { mutate: createPlaceMutate, isPending: isCreating } = useCreatePlace();
 
   const previewUrl = placeState.uploadImage
     ? URL.createObjectURL(placeState.uploadImage)
@@ -353,8 +353,9 @@ export default function CreateSpace() {
           size="lg"
           color="primary"
           onClick={onCreateBtnClick}
+          disabled={isCreating}
         >
-          장소 등록
+          {isCreating ? '장소 생성 중...' : '장소 등록'}
         </Button>
       </div>
 

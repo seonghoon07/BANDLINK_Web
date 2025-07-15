@@ -8,7 +8,7 @@ export type DateTimeValue = {
   minute: string;
 };
 
-export const userType = atomWithStorage<RoleType>('userType', 'FAN');
+export const userType = atomWithStorage<RoleType | null>('userType', null);
 
 export const rentalStartTimeAtom = atom<DateTimeValue | null>(null);
 export const rentalEndTimeAtom = atom<DateTimeValue | null>(null);
