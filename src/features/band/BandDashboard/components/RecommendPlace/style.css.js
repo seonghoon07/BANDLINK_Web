@@ -6,6 +6,7 @@ export const livePerformanceContainer = style({
     width: '100%',
     ...flex.COLUMN_FLEX,
     gap: '12px',
+    minHeight: '176px',
 });
 export const titleText = style({
     ...font.h5,
