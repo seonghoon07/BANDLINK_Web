@@ -7,6 +7,7 @@ import { useRef, useState } from 'react';
 import Button from '@/components/common/Button';
 import { useAtom } from 'jotai/index';
 import { createRoomAtom } from '@/shared/store/createRoomAtom';
+import { validateCreateRoomInput } from '@/shared/helpers/validateCreateRoom';
 export default function CreateRoom() {
     const navigate = useNavigate();
     const [isUpload, setIsUpload] = useState(false);
@@ -30,8 +31,15 @@ export default function CreateRoom() {
         ImageInputRef.current?.click();
     };
     const handleCreateRoomBtnClick = () => {
-        if (!uploadImage) {
-            alert('사진을 업로드해주세요');
+        const validation = validateCreateRoomInput({
+            name,
+            description,
+            additionalDescription,
+            price,
+            image: uploadImage,
+        });
+        if (!validation.valid) {
+            alert(validation.message);
             return;
         }
         const newRoom = {

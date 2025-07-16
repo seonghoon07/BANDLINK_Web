@@ -19,6 +19,7 @@ import {
 } from '@/shared/store/createPlaceAtom';
 import { useCreatePlace } from '@/features/spaceOwner/services/spaceOwner.mutation';
 import { isCreateSpaceEmpty } from '@/shared/helpers/isCreateSpaceEmpty';
+import { validateCreatePlaceInput } from '@/shared/helpers/validateCreatePlace';
 
 export default function CreateSpace() {
   const navigate = useNavigate();
@@ -77,6 +78,15 @@ export default function CreateSpace() {
   };
 
   const onCreateBtnClick = () => {
+    const validation = validateCreatePlaceInput(placeState);
+    if (!validation.valid) {
+      alert(validation.message);
+      return;
+    }
+    if (roomList.length === 0) {
+      alert('1개 이상의 방이 존재해야 합니다');
+      return;
+    }
     const formData = new FormData();
 
     if (placeState.uploadImage) {
