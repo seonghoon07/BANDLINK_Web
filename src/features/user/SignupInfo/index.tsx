@@ -116,9 +116,7 @@ export default function SignupInfo() {
                 status: warningText ? 'error' : 'default',
               })}
               placeholder={
-                isBand && step === 1
-                  ? '닉네임을 입력해주세요.'
-                  : '밴드명을 입력해주세요.'
+                step === 1 ? '닉네임을 입력해주세요.' : '밴드명을 입력해주세요.'
               }
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}

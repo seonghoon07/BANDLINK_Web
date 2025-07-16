@@ -75,7 +75,5 @@ export default function SignupInfo() {
                                         ? '멋진 닉네임을 알려주세요'
                                         : '멋진 밴드명을 입력해주세요' })] })) : (_jsxs(_Fragment, { children: [_jsx("p", { className: S.titleText, children: "\uB9C8\uC9C0\uB9C9\uC785\uB2C8\uB2E4!" }), _jsx("p", { className: S.titleText, children: "\uBA4B\uC9C4 \uB2C9\uB124\uC784\uC744 \uC54C\uB824\uC8FC\uC138\uC694" })] })) }), _jsxs("div", { className: S.inputFormWrapper, children: [_jsxs("div", { className: S.warningWrapper, children: [_jsx("input", { className: S.nicknameInput({
                                             status: warningText ? 'error' : 'default',
-                                        }), placeholder: isBand && step === 1
-                                            ? '닉네임을 입력해주세요.'
-                                            : '밴드명을 입력해주세요.', value: inputValue, onChange: (e) => setInputValue(e.target.value) }), _jsx("p", { className: S.warning, children: warningText })] }), _jsx(Button, { color: buttonState, size: "lg", type: "submit", onClick: handleSignupClick, children: step === 1 && isBand ? '다음으로' : '시작하기' })] })] })] }));
+                                        }), placeholder: step === 1 ? '닉네임을 입력해주세요.' : '밴드명을 입력해주세요.', value: inputValue, onChange: (e) => setInputValue(e.target.value) }), _jsx("p", { className: S.warning, children: warningText })] }), _jsx(Button, { color: buttonState, size: "lg", type: "submit", onClick: handleSignupClick, children: step === 1 && isBand ? '다음으로' : '시작하기' })] })] })] }));
 }
