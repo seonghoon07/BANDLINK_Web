@@ -6,8 +6,10 @@ import {
   useReserveInfo,
   useRevenue,
 } from '@/features/spaceOwner/services/spaceOwner.query';
+import { useNavigate } from 'react-router-dom';
 
 export default function Dashboard() {
+  const navigate = useNavigate();
   const { data: reservationInfo } = useReserveInfo();
   const { data: revenue } = useRevenue();
   const { data: place } = useMyPlace();
@@ -114,7 +116,10 @@ export default function Dashboard() {
               <p className={S.emptyText}>등록된 장소가 없습니다!</p>
             </div>
           ) : (
-            <div className={S.mySpaceWrapper}>
+            <div
+              className={S.mySpaceWrapper}
+              onClick={() => navigate('/spaceOwner/space')}
+            >
               <img
                 className={S.spaceImage}
                 alt="장소 이미지"

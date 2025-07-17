@@ -44,6 +44,10 @@ export default function SettingMenuSection() {
   const { mutate: deleteUserMutate } = useDeleteUserMutation();
 
   const handleMenuClick = (item: SettingItem) => {
+    if (item.label === '공지사항' || item.label === 'FAQ') {
+      alert('준비중인 서비스입니다.');
+      return;
+    }
     if (item.label === '로그아웃') {
       const isLogout = confirm('정말로 로그아웃 하시겠습니까?');
       if (isLogout) {

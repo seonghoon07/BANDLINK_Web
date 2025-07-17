@@ -30,15 +30,21 @@ export default function UpcomingPerformances() {
     <div className={S.upcomingPerformanceContainer}>
       <p className={S.titleText}>곧 열리는 공연</p>
       <div className={S.upcomingPerformanceCardWrapper}>
-        {upcomingPerformances?.map((performance: PerformanceType) => (
-          <PerformanceCard
-            key={performance.id}
-            type="upcoming"
-            image={performance.posterUrl}
-            title={performance.title}
-            stateText={`${getDaysUntil(performance.startTime)}`}
-          />
-        ))}
+        {upcomingPerformances?.length > 0 ? (
+          upcomingPerformances?.map((performance: PerformanceType) => (
+            <PerformanceCard
+              key={performance.id}
+              type="upcoming"
+              image={performance.posterUrl}
+              title={performance.title}
+              stateText={`${getDaysUntil(performance.startTime)}`}
+            />
+          ))
+        ) : (
+          <div className={S.noUpcomingContainer}>
+            <p className={S.noUpcomingText}>곧 열리는 공연이 없습니다.</p>
+          </div>
+        )}
       </div>
     </div>
   );

@@ -61,9 +61,9 @@ export default function MySpace() {
           size="lg"
           color="primary"
           onClick={() =>
-            place
-              ? navigate('/spaceOwner/space/fix')
-              : navigate('/spaceOwner/space/create')
+            !place
+              ? navigate('/spaceOwner/space/create')
+              : alert('구현중인 기능입니다.')
           }
         >
           {place ? '수정하기' : '등록하기'}
