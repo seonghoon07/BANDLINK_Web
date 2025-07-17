@@ -31,7 +31,7 @@ export default function RoomReservation() {
     date: selectedDate,
   };
   const { data: roomDetails } = useRoomDetails(roomId!);
-  const { mutate: roomReserveMutate } = useRoomReserveMutation();
+  const { mutate: roomReserveMutate, isPending } = useRoomReserveMutation();
   const { data: unavailableDates = [] } = useUnavailableDates(dateInfo);
   const { data: unavailableHours = [] } = useUnavailableHours(timeReserveInfo);
 
@@ -59,6 +59,7 @@ export default function RoomReservation() {
   };
 
   const onReserveBtnClick = () => {
+    if (isPending) return;
     const roomReserveBody = buildRoomReserveBody(
       selectedDate,
       selectedRange,
@@ -135,8 +136,9 @@ export default function RoomReservation() {
               type="submit"
               color="primary"
               onClick={onReserveBtnClick}
+              disabled={isPending}
             >
-              예매하기
+              {isPending ? '예매중...' : '예매하기'}
             </Button>
           </>
         )}

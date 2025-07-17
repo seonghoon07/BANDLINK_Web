@@ -20,7 +20,8 @@ export const contentContainer = style({
 
 export const headerContainer = style({
   ...flex.CENTER,
-  paddingTop: '60px',
+  padding: '72px 0 12px 0',
+  borderBottom: `1px solid ${theme.gray['700']}`,
 });
 
 export const headerTitle = style({

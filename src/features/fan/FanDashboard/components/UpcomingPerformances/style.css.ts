@@ -17,6 +17,7 @@ export const titleText = style({
 
 export const upcomingPerformanceCardWrapper = style({
   width: '100%',
+  height: '100%',
   ...flex.FLEX,
   gap: '8px',
   overflowX: 'auto',
@@ -25,4 +26,15 @@ export const upcomingPerformanceCardWrapper = style({
       display: 'none',
     },
   },
+});
+
+export const noUpcomingContainer = style({
+  width: '100%',
+  height: '100%',
+  ...flex.CENTER,
+});
+
+export const noUpcomingText = style({
+  ...font.p2,
+  color: theme.gray['300'],
 });

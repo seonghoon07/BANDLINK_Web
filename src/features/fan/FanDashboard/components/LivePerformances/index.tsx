@@ -9,17 +9,23 @@ export default function LivePerformances() {
     <div className={S.livePerformanceContainer}>
       <p className={S.titleText}>실시간 인기 공연</p>
       <div className={S.livePerformanceCardWrapper}>
-        {performances?.map((i: PerformanceType) => {
-          return (
-            <LivePerformanceCard
-              key={i.id}
-              type={'live'}
-              image={i.posterUrl}
-              title={i.title}
-              stateText={'800'}
-            />
-          );
-        })}
+        {performances?.length > 0 ? (
+          performances?.map((i: PerformanceType) => {
+            return (
+              <LivePerformanceCard
+                key={i.id}
+                type={'live'}
+                image={i.posterUrl}
+                title={i.title}
+                stateText={'N'}
+              />
+            );
+          })
+        ) : (
+          <div className={S.noLiveContainer}>
+            <p className={S.noLiveText}>실시간 인기 공연이 없습니다.</p>
+          </div>
+        )}
       </div>
     </div>
   );
