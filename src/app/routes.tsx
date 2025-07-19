@@ -6,6 +6,7 @@ import {
   ChooseRolePage,
   ChangeRolePage,
   BandRegistrationPage,
+  GoogleRedirectPage,
 } from '@/pages/user';
 import {
   FanDashboardPage,
@@ -37,6 +38,7 @@ export default function Router() {
   return (
     <Routes>
       <Route path="/" element={<StartPage />} />
+      <Route path="/google/callback" element={<GoogleRedirectPage />} />
       <Route path="/role" element={<ChooseRolePage />} />
       <Route path="/role/change" element={<ChangeRolePage />} />
       <Route path="/nickname" element={<SignupInfoPage />} />
