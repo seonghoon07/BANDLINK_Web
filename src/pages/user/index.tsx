@@ -4,3 +4,4 @@ export { default as ChooseRolePage } from './ChooseRolePage';
 export { default as StartPage } from './StartPage';
 export { default as ChangeRolePage } from './ChangeRolePage';
 export { default as BandRegistrationPage } from './BandRegistrationPage';
+export { default as GoogleRedirectPage } from './GoogleRedirectPage';
