@@ -13,6 +13,7 @@ export const placeImg = style({
   height: '72px',
   aspectRatio: '1/1',
   borderRadius: '8px',
+  objectFit: 'cover',
 });
 
 export const textContainer = style({
