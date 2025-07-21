@@ -2,8 +2,10 @@ import * as S from './style.css';
 import PerformanceCard from '@/components/DashboardCard';
 import { usePerformances } from '@/features/fan/services/fan.query';
 import { PerformanceType } from '@/shared/types/performanceType';
+import { useNavigate } from 'react-router-dom';
 
 export default function UpcomingPerformances() {
+  const navigate = useNavigate();
   const { data: performances } = usePerformances();
   const now = new Date();
 
@@ -38,6 +40,7 @@ export default function UpcomingPerformances() {
               image={performance.posterUrl}
               title={performance.title}
               stateText={`${getDaysUntil(performance.startTime)}`}
+              onClick={() => navigate(`/fan/performances/${performance.id}`)}
             />
           ))
         ) : (
